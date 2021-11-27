@@ -15,10 +15,10 @@ public class Student {
     @SerializedName("id")
     public int id;
 
-    @SerializedName("name")
+    @SerializedName(value = "name", alternate = {"studentName"})
     public String name;
 
-    @SerializedName("surname")
+    @SerializedName(value = "surname", alternate = {"studentSurname"})
     public String surname;
 
     @SerializedName("transcripts")
@@ -117,7 +117,7 @@ public class Student {
     public ArrayList<Transcript> getTranscripts() {
         return transcripts;
     }
-    
+
     public void calculateCumutlativeGPA(int semester) {//this will implement at register course (transcript) part.
         this.gpa = 4.0f;
     }
