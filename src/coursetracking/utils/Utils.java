@@ -28,8 +28,13 @@ public class Utils {
         return lettersHashMap.get(letterGrade);
     }
 
-    private File output;
+    private File resources;
+    public File getResource(String filename){ 
+        if (resources == null) resources = new File("./resources");
+        return new File(resources,filename);
+    }
 
+    private File output;
     public File getOutputPath() {
         if (output == null) output = new File("./output");
         output.mkdir();
