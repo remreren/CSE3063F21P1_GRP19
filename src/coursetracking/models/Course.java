@@ -7,7 +7,6 @@ public class Course {
     private Object[] sections;
     private Student[] students;
     protected Course[] prerequisities;
-    private Department department;
     protected int semester;
     private String type;
 
