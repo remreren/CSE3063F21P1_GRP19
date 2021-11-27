@@ -114,10 +114,6 @@ public class Student {
         Collections.sort(transcripts);
     }
 
-    public ArrayList<Transcript> getTranscripts() {
-        return transcripts;
-    }
-
     public void calculateCumutlativeGPA(int semester) {//this will implement at register course (transcript) part.
         this.gpa = 4.0f;
     }
