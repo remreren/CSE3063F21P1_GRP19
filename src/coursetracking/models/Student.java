@@ -24,27 +24,31 @@ public class Student {
     public String surname;
 
     @SerializedName("transcripts")
-    public ArrayList<Transcript> transcripts;
+    private ArrayList<Transcript> transcripts;
 
     private float gpa;
     private int semester;
-    public ArrayList<Course> currentCourses;
-    private Advisor advisor;
+    private ArrayList<Course> currentCourses;
 
-    private boolean addCourse(Course course) {
+    private int totalCredit;
+
+    public void calculate() {
+        sortTranscripts();
+        calculateTotalCredit();
+        calculateSemester();
+    }
+
+    public boolean addCourse(Course course) {
+        if (currentCourses.contains(course))
+            return false;
+        if (!canTakeCourse(course))
+            return false;
+        currentCourses.add(course);
         return true;
     }
 
-    public ArrayList<Transcript> getTranscripts() {
-        return transcripts;
-    }
-
-    public boolean readTranscript() {
+    public boolean register() {
         return true;
-    }
-
-    public void sortTranscripts() {
-        Collections.sort(transcripts);
     }
 
     public boolean canTakeCourse(Course course) {
@@ -64,7 +68,43 @@ public class Student {
     }
 
     public void calculateSemester() {
+        float cumulative = 0f;
+        int cumulativeCourseCredit = 0;
+        for (Transcript t : transcripts) {
+            cumulative += t.getSemesterGPA() * t.getTotalCredit();
+            cumulativeCourseCredit += t.getTotalCredit();
+            if (cumulative / cumulativeCourseCredit < 1.8f)
+                break;
+            semester = t.getSemester();
+        }
+    }
 
+    public void calculateTotalCredit() {
+        int sumOfCredits = 0;
+        for (Transcript t : transcripts) {
+            for (TakenCourse c : t.getCourses()) {
+                if (Utils.getInstance().getGPAOfLetterGrade(c.getLetterGrade()) > 0.1f)
+                    sumOfCredits += c.getCredit();
+            }
+        }
+        totalCredit = sumOfCredits;
+    }
+
+    // TODO: read transcript ??
+    public boolean readTranscript() {
+        return true;
+    }
+
+    public int getTotalCredit() {
+        return totalCredit;
+    }
+
+    public void sortTranscripts() {
+        Collections.sort(transcripts);
+    }
+
+    public ArrayList<Transcript> getTranscripts() {
+        return transcripts;
     }
 
     public void calculateCumutlativeGPA(int semester) {
