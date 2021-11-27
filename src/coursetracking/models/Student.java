@@ -23,7 +23,7 @@ public class Student {
     private float gpa;
     private int semester;
     private Course[] currentCourses;
-    private Advisor advisor;
+    private String advisor;
 
     private boolean addCourse(Course course) {
         return true;

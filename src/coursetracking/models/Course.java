@@ -6,9 +6,8 @@ public class Course {
     protected int credit;
     private Object[] sections;
     private Object lecturer;
-    private Student[] students;
     protected Course[] prerequisities;
-    private Department department;
+    private String department; //Tutulmayabilir
     protected int semester;
 
     public Course[] getPrerequisites() {
