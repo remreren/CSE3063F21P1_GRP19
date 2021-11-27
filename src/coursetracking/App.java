@@ -32,7 +32,8 @@ public class App {
             }
             num = num - 1069;
         }
-
+    }
+    
     public void start() throws Exception {
 
         File input = Utils.getInstance().getResource("input.json");
