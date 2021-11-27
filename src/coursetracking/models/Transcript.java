@@ -4,26 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 import coursetracking.utils.Utils;
 
-public class Transcript implements Comparable {
+public class Transcript implements Comparable<Transcript> {
     private int id;
 
     @SerializedName("semester")
     private int semester;
 
     private TakenCourse[] semesterCourses;
-
-    // private Course[] takenCourses;
-    // private Course[] failedCourses;
-    // private Course[] passedCourses;
-
     private float semesterGPA;
+    private int totalCredit;
 
-    public TakenCourse[] getCourses() {
-        return semesterCourses;
-    }
-
-    public int getSemester() {
-        return semester;
+    public void calculate() {
+        calculateTotalCredit();
+        calculateSemesterGPA();
     }
 
     public void calculateSemesterGPA() {
@@ -38,12 +31,32 @@ public class Transcript implements Comparable {
         this.semesterGPA = sum/creditCount;
     }
 
+    public void calculateTotalCredit() {
+        int sum = 0;
+        for (TakenCourse course: semesterCourses) {
+            sum += course.getCredit();
+        }
+        totalCredit = sum;
+    }
+
+    public TakenCourse[] getCourses() {
+        return semesterCourses;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
     public float getSemesterGPA() {
         return semesterGPA;
     }
 
+    public int getTotalCredit() {
+        return totalCredit;
+    }
+
     @Override
-    public int compareTo(Object o) {
-        return ((Transcript) o).semester;
+    public int compareTo(Transcript o) {
+        return o.semester;
     }   
 }

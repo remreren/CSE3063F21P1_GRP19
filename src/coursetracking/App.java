@@ -1,16 +1,12 @@
 package coursetracking;
 
 import java.io.File;
-
 import java.util.Scanner;
 
 import com.google.gson.Gson;
 
-
 import coursetracking.models.Config;
-
 import coursetracking.utils.Utils;
-
 /**
  * App
  */
@@ -22,9 +18,9 @@ public class App {
 
     public void start() throws Exception {
 
-        File myObj = Utils.getInstance().getResource("input.json");
+        File input = Utils.getInstance().getResource("input.json");
         String data = "";
-        Scanner myReader = new Scanner(myObj);
+        Scanner myReader = new Scanner(input);
         while (myReader.hasNextLine()) {
             data += myReader.nextLine();
         }
@@ -33,5 +29,3 @@ public class App {
         System.out.println(c);
     }
 }
-
-
