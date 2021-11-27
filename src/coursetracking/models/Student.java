@@ -30,19 +30,17 @@ public class Student {
 
     private int totalCredit;
 
-    public void Student(){}
+    public Student(){
+        // empty constructor.
+    }
 
-    public void Student(int id, String name, String surname, int semester){
+    public Student(int id, String name, String surname, int semester){
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.semester = semester;
         this.currentCourses = null;
         this.transcripts = null;
-    }
-
-    public ArrayList<Transcript> getTranscripts() {
-        return transcripts;
     }
   
     public void calculate() {
