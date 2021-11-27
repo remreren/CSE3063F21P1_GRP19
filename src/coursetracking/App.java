@@ -10,7 +10,6 @@ import coursetracking.utils.Utils;
 
 import com.google.gson.Gson;
 
-
 /**
  * App
  */
@@ -19,8 +18,12 @@ public class App {
         App app = new App();
         app.start();
     }
+
+    public void start() throws Exception {
+        readInput();
+    }
     
-    void createStudents(){//Creates Students
+    public void createStudents(){//Creates Students
         int num = 150121001;
         for(int sem = 1; sem <= 8; sem += 2){
             for(int id = num; id < num + 70; id++){
@@ -32,8 +35,9 @@ public class App {
             }
             num = num - 1069;
         }
+    }
 
-    public void start() throws Exception {
+    public void readInput() throws Exception {
         File input = Utils.getInstance().getResource("input.json");
         String data = "";
         Scanner myReader = new Scanner(input);
