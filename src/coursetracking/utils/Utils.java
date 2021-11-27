@@ -1,5 +1,6 @@
 package coursetracking.utils;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class Utils {
@@ -16,4 +17,11 @@ public class Utils {
     public float getGPAOfLetterGrade(String letterGrade) {
         return lettersHashMap.get(letterGrade);
     }
+
+    private File resources;
+    public File getResource(String filename){ 
+        if (resources == null) resources = new File("./resources");
+        return new File(resources,filename);
+    }
+
 }
