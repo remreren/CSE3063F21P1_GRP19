@@ -1,15 +1,14 @@
 package coursetracking;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URL;
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 
-import coursetracking.models.Course;
+
+import coursetracking.models.Config;
+
 import coursetracking.utils.Utils;
 
 /**
@@ -35,12 +34,4 @@ public class App {
     }
 }
 
-class Config { 
-    public String registrationTerm;
-    public Course[] courses ;
-    @Override
-    public String toString() {
-        return "Config [courses=" + Arrays.toString(courses) + ", semester=" + registrationTerm + "]";
-    }
-    
-}
+
