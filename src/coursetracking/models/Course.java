@@ -1,8 +1,8 @@
 package coursetracking.models;
 
 public class Course {
-    private int id;
-    protected String name;
+    protected String courseCode;
+    protected String courseName;
     protected int credit;
     protected Course[] prerequisities;
     protected int semester;
@@ -13,7 +13,7 @@ public class Course {
     }
 
     public String getCourseName() {
-        return name;
+        return courseCode;
     }
 
     public int getSemester() {
@@ -28,7 +28,7 @@ public class Course {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((courseCode == null) ? 0 : courseCode.hashCode());
         return result;
     }
 
@@ -41,10 +41,10 @@ public class Course {
         if (getClass() != obj.getClass())
             return false;
         Course other = (Course) obj;
-        if (name == null) {
-            if (other.name != null)
+        if (courseCode == null) {
+            if (other.courseCode != null)
                 return false;
-        } else if (!name.equals(other.name))
+        } else if (!courseCode.equals(other.courseCode))
             return false;
         return true;
     }    

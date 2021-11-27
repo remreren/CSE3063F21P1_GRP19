@@ -1,13 +1,20 @@
 package coursetracking.models;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-public class Config { 
+public class Config {
     public String registrationTerm;
-    public Course[] courses ;
-    @Override
-    public String toString() {
-        return "Config [courses=" + Arrays.toString(courses) + ", semester=" + registrationTerm + "]";
-    }
-    
+    public ArrayList<Curriculum> courses;
+    public ArrayList<Course> electives;
+}
+
+class Curriculum {
+    public String semester;
+    public ArrayList<Course> courses;
+}
+
+class Elective {
+    public String type;
+    public int creditRequired;
+    public ArrayList<Course> courses;
 }

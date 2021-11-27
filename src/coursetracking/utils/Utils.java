@@ -6,11 +6,8 @@ import java.util.HashMap;
 public class Utils {
 
     private static Utils utils;
-
-    public static Utils getInstance() {
-        if (utils == null) utils = new Utils();
-        return utils;
-    }
+    private File resources;
+    private File output;
 
     private HashMap<String, Float> lettersHashMap = new HashMap<>(){{
         put("AA", 4.0f);
@@ -24,17 +21,20 @@ public class Utils {
         put("FF", 0.0f);
     }};
 
+    public static Utils getInstance() {
+        if (utils == null) utils = new Utils();
+        return utils;
+    }
+
     public float getGPAOfLetterGrade(String letterGrade) {
         return lettersHashMap.get(letterGrade);
     }
 
-    private File resources;
     public File getResource(String filename){ 
         if (resources == null) resources = new File("./resources");
         return new File(resources,filename);
     }
 
-    private File output;
     public File getOutputPath() {
         if (output == null) output = new File("./output");
         output.mkdir();
