@@ -4,10 +4,7 @@ public class Course {
     private int id;
     protected String name;
     protected int credit;
-    private Object[] sections;
-    private Object lecturer;
     protected Course[] prerequisities;
-    private String department; //Tutulmayabilir
     protected int semester;
 
     public Course[] getPrerequisites() {
