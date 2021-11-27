@@ -1,4 +1,4 @@
-package main.java.coursetracking;
+package coursetracking;
 
 /**
  * HelloWorld
