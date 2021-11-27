@@ -441,7 +441,11 @@
             "courseCode": "CSE4298",
             "courseName": "Engineering Project II",
             "credit": 5,
-            "prerequisites": [],
+            "prerequisites": [
+                {
+                    "courseCode":"CSE4297"
+                }
+            ],
             "semester": 8,
             "type": null
         },
