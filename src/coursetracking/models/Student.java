@@ -136,7 +136,6 @@ public class Student {
         try {
             File std = new File(Utils.getInstance().getOutputPath(), this.id + ".json");
             std.createNewFile();
-            // if (std.createNewFile()) throw new IOException("Tükürrr");
             FileWriter writer = new FileWriter(std);
             gson.toJson(this, writer);
             writer.flush();
