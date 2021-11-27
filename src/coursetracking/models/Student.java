@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import com.google.gson.Gson;
-
 import com.google.gson.annotations.SerializedName;
 
 import coursetracking.utils.Utils;
@@ -32,19 +30,17 @@ public class Student {
 
     private int totalCredit;
 
-    public void Student(){}
+    public Student(){
+        // empty constructor.
+    }
 
-    public void Student(int id, String name, String surname, int semester){
+    public Student(int id, String name, String surname, int semester){
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.semester = semester;
         this.currentCourses = null;
         this.transcripts = null;
-    }
-
-    public ArrayList<Transcript> getTranscripts() {
-        return transcripts;
     }
   
     public void calculate() {
@@ -136,7 +132,6 @@ public class Student {
         try {
             File std = new File(Utils.getInstance().getOutputPath(), this.id + ".json");
             std.createNewFile();
-            // if (std.createNewFile()) throw new IOException("Tükürrr");
             FileWriter writer = new FileWriter(std);
             gson.toJson(this, writer);
             writer.flush();
