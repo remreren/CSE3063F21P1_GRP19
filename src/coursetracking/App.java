@@ -17,7 +17,6 @@ public class App {
     }
 
     public void start() throws Exception {
-
         File input = Utils.getInstance().getResource("input.json");
         String data = "";
         Scanner myReader = new Scanner(input);
