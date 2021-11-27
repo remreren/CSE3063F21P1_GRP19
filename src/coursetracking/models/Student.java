@@ -23,10 +23,20 @@ public class Student {
     private float gpa;
     private int semester;
     private Course[] currentCourses;
-    private String advisor;
 
     private boolean addCourse(Course course) {
         return true;
+    }
+
+    public void Student(){}
+
+    public void Student(int id, String name, String surname, int semester){
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.semester = semester;
+        this.currentCourses = null;
+        this.transcripts = null;
     }
 
     public ArrayList<Transcript> getTranscripts() {
@@ -60,11 +70,15 @@ public class Student {
         
     }
 
-    public void calculateCumutlativeGPA(int semester) {
+    public void calculateCumutlativeGPA(int semester) {//this will implement at register course (transcript) part.
         this.gpa = 4.0f;
     }
 
     public float getGPA() {
         return gpa;
+    }
+
+    public void Serialization(){
+        //Serialize the object
     }
 }
