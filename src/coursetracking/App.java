@@ -28,11 +28,12 @@ public class App {
     public void start() throws Exception {
         readInput();
         readNames();
-        System.out.println(data.students.get(2).name);
+        createStudents();
+        System.out.println(data.students.get(2).id);
     }
 
     public void readNames() throws Exception {
-        File input = Utils.getInstance().getResource("names.json");
+        File input = Utils.getInstance().getResource("allStudentNames.json");
         String data = "";
         Scanner myReader = new Scanner(input);
         while (myReader.hasNextLine()) {
@@ -65,7 +66,7 @@ public class App {
                 //data.students.get(index).addCourse(course); //its could be in loop
                 index++;
             }
-            num = num - 1069;
+            num = num - 1000;
         }
     }
 }
