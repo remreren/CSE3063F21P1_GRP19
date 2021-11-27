@@ -1,10 +1,16 @@
 package coursetracking.models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import com.google.gson.Gson;
 
 import com.google.gson.annotations.SerializedName;
+
+import coursetracking.utils.Utils;
 
 public class Student {
 
@@ -18,11 +24,11 @@ public class Student {
     public String surname;
 
     @SerializedName("transcripts")
-    private ArrayList<Transcript> transcripts;
-    
+    public ArrayList<Transcript> transcripts;
+
     private float gpa;
     private int semester;
-    private Course[] currentCourses;
+    public ArrayList<Course> currentCourses;
     private Advisor advisor;
 
     private boolean addCourse(Course course) {
@@ -42,7 +48,8 @@ public class Student {
     }
 
     public boolean canTakeCourse(Course course) {
-        if (semester < course.getSemester()) return false;
+        if (semester < course.getSemester())
+            return false;
 
         nextpr: for (Course pr : course.getPrerequisites()) {
             for (Transcript tr : transcripts) {
@@ -57,7 +64,7 @@ public class Student {
     }
 
     public void calculateSemester() {
-        
+
     }
 
     public void calculateCumutlativeGPA(int semester) {
@@ -67,4 +74,22 @@ public class Student {
     public float getGPA() {
         return gpa;
     }
+
+    public void save() {
+        Gson gson = new Gson();
+
+        try {
+            File std = new File(Utils.getInstance().getOutputPath(), this.id + ".json");
+            std.createNewFile();
+            // if (std.createNewFile()) throw new IOException("Tükürrr");
+            FileWriter writer = new FileWriter(std);
+            gson.toJson(this, writer);
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
+
 }
