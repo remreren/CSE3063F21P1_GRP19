@@ -14,6 +14,9 @@ import com.google.gson.Gson;
  * App
  */
 public class App { 
+
+    Config config;
+
     public static void main(String[] args) throws Exception {
         App app = new App();
         app.start();
@@ -21,6 +24,18 @@ public class App {
 
     public void start() throws Exception {
         readInput();
+    }
+
+    public void readInput() throws Exception {
+        File input = Utils.getInstance().getResource("input.json");
+        String data = "";
+        Scanner myReader = new Scanner(input);
+        while (myReader.hasNextLine()) {
+            data += myReader.nextLine();
+        }
+        myReader.close();
+        config = new Gson().fromJson(data, Config.class);
+        System.out.println(config);
     }
     
     public void createStudents(){//Creates Students
@@ -35,17 +50,5 @@ public class App {
             }
             num = num - 1069;
         }
-    }
-
-    public void readInput() throws Exception {
-        File input = Utils.getInstance().getResource("input.json");
-        String data = "";
-        Scanner myReader = new Scanner(input);
-        while (myReader.hasNextLine()) {
-            data += myReader.nextLine();
-        }
-        myReader.close();
-        Config c = new Gson().fromJson(data, Config.class);
-        System.out.println(c);
     }
 }
