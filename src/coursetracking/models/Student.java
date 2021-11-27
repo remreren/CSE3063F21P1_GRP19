@@ -32,6 +32,21 @@ public class Student {
 
     private int totalCredit;
 
+    public void Student(){}
+
+    public void Student(int id, String name, String surname, int semester){
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.semester = semester;
+        this.currentCourses = null;
+        this.transcripts = null;
+    }
+
+    public ArrayList<Transcript> getTranscripts() {
+        return transcripts;
+    }
+  
     public void calculate() {
         sortTranscripts();
         calculateTotalCredit();
@@ -107,7 +122,7 @@ public class Student {
         return transcripts;
     }
 
-    public void calculateCumutlativeGPA(int semester) {
+    public void calculateCumutlativeGPA(int semester) {//this will implement at register course (transcript) part.
         this.gpa = 4.0f;
     }
 
@@ -115,6 +130,10 @@ public class Student {
         return gpa;
     }
 
+    public void Serialization(){
+        //Serialize the object
+    }
+  
     public void save() {
         Gson gson = new Gson();
 
@@ -131,5 +150,4 @@ public class Student {
         }
 
     }
-
 }
