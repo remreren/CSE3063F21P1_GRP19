@@ -1,5 +1,7 @@
 package coursetracking.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Course {
     protected String courseCode;
     protected String courseName;
@@ -7,6 +9,15 @@ public class Course {
     protected Course[] prerequisities;
     protected int semester;
     private String type;
+
+    public Course(Course c) {
+        this.courseCode = c.courseCode;
+        this.courseName = c.courseName;
+        this.credit = c.credit;
+        this.prerequisities = c.prerequisities;
+        this.semester = c.semester;
+        this.type = c.type;
+    }
 
     public Course[] getPrerequisites() {
         return prerequisities;
