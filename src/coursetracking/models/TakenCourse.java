@@ -6,4 +6,8 @@ public class TakenCourse extends Course {
     public String getLetterGrade() {
         return letterGrade;
     }
+
+    public void setLetterGrade(String letterGrade) {
+       this.letterGrade = letterGrade;
+    }
 }
