@@ -70,4 +70,9 @@ public class Transcript implements Comparable<Transcript> {
         if (this.semesterCourses == null) this.semesterCourses = new ArrayList<>();
         this.semesterCourses.add(tc);
     }
+
+    public void addCourse(ArrayList<TakenCourse> tcs) {
+        if (this.semesterCourses == null) this.semesterCourses = new ArrayList<>();
+        this.semesterCourses.addAll(tcs);
+    }
 }

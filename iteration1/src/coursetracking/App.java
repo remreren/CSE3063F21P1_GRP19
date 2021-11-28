@@ -20,8 +20,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class App {
 
-    Config config;
-    Data data;
+    private Config config;
+    private Data data;
+    private Gson gson = new Gson();
 
     public static void main(String[] args) throws Exception {
         App app = new App();
@@ -31,9 +32,50 @@ public class App {
     public void start() throws Exception {
         readInput();
         readNames();
-        System.out.println(Utils.getInstance().getOutputPath().list().length);
         if (Utils.getInstance().getOutputPath().list().length == 0)
             createStudents();
+
+        readStudents();
+        chooseCourses();
+        exams();
+    }
+
+    public void exams() {
+        for (Student st : data.students) {
+            Transcript transcript = new Transcript();
+            for (Course c : st.getCurrentCourses()) {
+                int rnd = random.nextInt(5);
+                transcript.addCourse(new TakenCourse(c, letterNotes[rnd]));
+            }
+            transcript.calculate();
+            st.setCurrentTrancript(transcript);
+            st.calculate();
+            st.save();
+        }
+    }
+
+    public void chooseCourses() {
+        for (Student st : data.students) {
+            for (Course c : config.curriculum) {
+                if (st.canTakeCourse(c))
+                    st.addCourse(c);
+            }
+        }
+    }
+
+    public void readStudents() throws Exception {
+        data.students = new ArrayList<>();
+        for (File f : Utils.getInstance().getOutputPath().listFiles()) {
+            if (f.getName().endsWith(".json")) {
+                String data = "";
+                Scanner myReader = new Scanner(f);
+                while (myReader.hasNextLine()) {
+                    data += myReader.nextLine();
+                }
+                myReader.close();
+                this.data.students.add(gson.fromJson(data, Student.class));
+            }
+        }
     }
 
     public void readNames() throws Exception {
@@ -44,7 +86,7 @@ public class App {
             data += myReader.nextLine();
         }
         myReader.close();
-        this.data = new Gson().fromJson(data, Data.class);
+        this.data = gson.fromJson(data, Data.class);
     }
 
     public void readInput() throws Exception {
@@ -55,7 +97,7 @@ public class App {
             data += myReader.nextLine();
         }
         myReader.close();
-        config = new Gson().fromJson(data, Config.class);
+        config = gson.fromJson(data, Config.class);
     }
 
     public void createStudents() {// Creates Students

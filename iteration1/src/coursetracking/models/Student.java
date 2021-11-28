@@ -15,14 +15,16 @@ public class Student {
     @SerializedName("id")
     public int id;
 
-    @SerializedName(value = "name", alternate = {"studentName"})
+    @SerializedName(value = "name", alternate = { "studentName" })
     public String name;
 
-    @SerializedName(value = "surname", alternate = {"studentSurname"})
+    @SerializedName(value = "surname", alternate = { "studentSurname" })
     public String surname;
 
     @SerializedName("transcripts")
     private ArrayList<Transcript> transcripts;
+
+    private Transcript currentTranscript;
 
     private float gpa;
     private int semester;
@@ -30,11 +32,11 @@ public class Student {
 
     private int totalCredit;
 
-    public Student(){
+    public Student() {
         // empty constructor.
     }
 
-    public Student(int id, String name, String surname, int semester){
+    public Student(int id, String name, String surname, int semester) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -42,7 +44,7 @@ public class Student {
         this.currentCourses = null;
         this.transcripts = null;
     }
-  
+
     public void calculate() {
         sortTranscripts();
         calculateTotalCredit();
@@ -59,6 +61,11 @@ public class Student {
     }
 
     public boolean register() {
+        Transcript tr = new Transcript();
+        for (Course c : currentCourses)
+            tr.addCourse(new TakenCourse(c, null));
+        this.currentTranscript = tr;
+        this.save();
         return true;
     }
 
@@ -118,14 +125,26 @@ public class Student {
         return transcripts;
     }
 
-    public void calculateCumutlativeGPA(int semester) {//this will implement at register course (transcript) part.
+    public void calculateCumutlativeGPA(int semester) {// this will implement at register course (transcript) part.
         this.gpa = 4.0f;
     }
 
     public float getGPA() {
         return gpa;
     }
-  
+
+    public ArrayList<Course> getCurrentCourses() {
+        return currentCourses;
+    }
+
+    public Transcript getCurrenTranscript() {
+        return currentTranscript;
+    }
+
+    public void setCurrentTrancript(Transcript currentTranscript) {
+        this.currentTranscript = currentTranscript;
+    }
+
     public void save() {
         Gson gson = new Gson();
 
@@ -142,8 +161,9 @@ public class Student {
 
     }
 
-    public void addTranscript(Transcript tr){
-        if (this.transcripts == null) this.transcripts = new ArrayList<>();
+    public void addTranscript(Transcript tr) {
+        if (this.transcripts == null)
+            this.transcripts = new ArrayList<>();
         this.transcripts.add(tr);
     }
 }
