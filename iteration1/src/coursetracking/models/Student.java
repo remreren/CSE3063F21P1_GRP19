@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.io.File;
 import java.io.FileWriter;
+import java.security.AlgorithmParametersSpi;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
@@ -29,11 +30,21 @@ public class Student {
     private float gpa;
     private int semester;
     private ArrayList<Course> currentCourses;
+    private ArrayList<String> passedCourses;
 
     private int totalCredit;
 
     public Student() {
         // empty constructor.
+    }
+
+    public Student(Student student) {
+        this.id = student.id;
+        this.name = student.name;
+        this.surname = student.surname;
+        this.semester = student.semester;
+        this.currentCourses = null;
+        this.transcripts = null;
     }
 
     public Student(int id, String name, String surname, int semester) {
@@ -47,11 +58,14 @@ public class Student {
 
     public void calculate() {
         sortTranscripts();
+        calculatePassedCourses();
         calculateTotalCredit();
         calculateSemester();
     }
 
     public boolean addCourse(Course course) {
+        if (currentCourses == null)
+            currentCourses = new ArrayList<>();
         if (currentCourses.contains(course))
             return false;
         if (!canTakeCourse(course))
@@ -73,16 +87,19 @@ public class Student {
         if (semester < course.getSemester())
             return false;
 
-        nextpr: for (Course pr : course.getPrerequisites()) {
-            for (Transcript tr : transcripts) {
-                for (Course c : tr.getCourses()) {
-                    if (c.getCourseName() == pr.getCourseName())
-                        continue nextpr;
+        if (course.getPrerequisites() != null) {
+            nextpr: for (Course pr : course.getPrerequisites()) {
+                for (Transcript tr : transcripts) {
+                    for (Course c : tr.getCourses()) {
+                        if (c.getCourseName() == pr.getCourseName())
+                            continue nextpr;
+                    }
+                    return false;
                 }
-                return false;
             }
         }
-        return true;
+        
+        return !passedCourses.contains(course.courseCode);
     }
 
     public void calculateSemester() {
@@ -106,6 +123,19 @@ public class Student {
             }
         }
         totalCredit = sumOfCredits;
+    }
+
+    public void calculatePassedCourses() {
+        if (passedCourses == null)
+            passedCourses = new ArrayList<>();
+        for (Transcript t : transcripts) {
+            for (TakenCourse c : t.getCourses()) {
+                if (Utils.getInstance().getGPAOfLetterGrade(c.getLetterGrade()) - 0.01 > Utils.getInstance()
+                        .getGPAOfLetterGrade("FF") && !passedCourses.contains(c.courseCode)) {
+                    passedCourses.add(c.courseCode);
+                }
+            }
+        }
     }
 
     // TODO: read transcript ??

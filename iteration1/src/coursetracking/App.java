@@ -23,6 +23,7 @@ public class App {
     private Config config;
     private Data data;
     private Gson gson = new Gson();
+    private ArrayList<Student> students = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         App app = new App();
@@ -43,21 +44,23 @@ public class App {
     public void exams() {
         for (Student st : data.students) {
             Transcript transcript = new Transcript();
-            for (Course c : st.getCurrentCourses()) {
-                int rnd = random.nextInt(5);
-                transcript.addCourse(new TakenCourse(c, letterNotes[rnd]));
+            if (st.getCurrentCourses() != null) {
+                for (Course c : st.getCurrentCourses()) {
+                    int rnd = random.nextInt(5);
+                    transcript.addCourse(new TakenCourse(c, letterNotes[rnd]));
+                }
+                transcript.calculate();
+                st.setCurrentTrancript(transcript);
+                st.calculate();
+                st.save();
             }
-            transcript.calculate();
-            st.setCurrentTrancript(transcript);
-            st.calculate();
-            st.save();
         }
     }
 
     public void chooseCourses() {
         for (Student st : data.students) {
             for (Course c : config.curriculum) {
-                if (st.canTakeCourse(c))
+                if (st.canTakeCourse(c) && ((c.getSemester() % 2 == 1) == (config.registrationTerm.toLowerCase().equals("fall"))))
                     st.addCourse(c);
             }
         }
@@ -73,7 +76,9 @@ public class App {
                     data += myReader.nextLine();
                 }
                 myReader.close();
-                this.data.students.add(gson.fromJson(data, Student.class));
+                Student st = gson.fromJson(data, Student.class);
+                st.calculate();
+                this.data.students.add(st);
             }
         }
     }
@@ -104,9 +109,11 @@ public class App {
         int num = 150121001, index = 0;
         for (int sem = 1; sem <= 8; sem += 2) {
             for (int id = num; id < num + 70; id++) {
-                data.students.get(index).id = id;
-                getCoursesBySemester(sem, data.students.get(index));
-                data.students.get(index).save();
+                Student std = new Student(data.students.get(index));
+                std.id = id;
+                getCoursesBySemester(sem, std);
+                students.add(std);
+                std.save();
                 index++;
             }
             num = num - 1000;
@@ -120,7 +127,7 @@ public class App {
         for (int i = 1; i <= semester; i++) {
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
-                if (semester == c.getSemester()) {
+                if (i == c.getSemester()) {
                     int rnd = random.nextInt(5);
                     TakenCourse tc = new TakenCourse(c, letterNotes[rnd]);
                     trscript.addCourse(tc);
