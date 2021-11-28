@@ -49,6 +49,10 @@ public class Transcript implements Comparable<Transcript> {
         return semester;
     }
 
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
     public float getSemesterGPA() {
         return semesterGPA;
     }
@@ -63,6 +67,7 @@ public class Transcript implements Comparable<Transcript> {
     }   
 
     public void addCourse(TakenCourse tc){
+        if (this.semesterCourses == null) this.semesterCourses = new ArrayList<>();
         this.semesterCourses.add(tc);
     }
 }

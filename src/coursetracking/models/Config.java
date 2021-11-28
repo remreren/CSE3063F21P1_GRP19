@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Config {
     public String registrationTerm;
-    public ArrayList<Course> courses;
+    public ArrayList<Course> curriculum;
     public ArrayList<Course> electives;
 }
 

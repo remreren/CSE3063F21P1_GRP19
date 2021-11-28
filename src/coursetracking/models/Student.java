@@ -143,6 +143,7 @@ public class Student {
     }
 
     public void addTranscript(Transcript tr){
+        if (this.transcripts == null) this.transcripts = new ArrayList<>();
         this.transcripts.add(tr);
     }
 }
