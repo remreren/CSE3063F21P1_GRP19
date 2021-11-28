@@ -1,5 +1,7 @@
 package coursetracking.models;
 
+import java.util.ArrayList;
+
 import com.google.gson.annotations.SerializedName;
 
 import coursetracking.utils.Utils;
@@ -10,7 +12,7 @@ public class Transcript implements Comparable<Transcript> {
     @SerializedName("semester")
     private int semester;
 
-    private TakenCourse[] semesterCourses;
+    private ArrayList<TakenCourse> semesterCourses;
     private float semesterGPA;
     private int totalCredit;
 
@@ -39,7 +41,7 @@ public class Transcript implements Comparable<Transcript> {
         totalCredit = sum;
     }
 
-    public TakenCourse[] getCourses() {
+    public ArrayList<TakenCourse> getCourses() {
         return semesterCourses;
     }
 
@@ -59,4 +61,8 @@ public class Transcript implements Comparable<Transcript> {
     public int compareTo(Transcript o) {
         return o.semester;
     }   
+
+    public void addCourse(TakenCourse tc){
+        this.semesterCourses.add(tc);
+    }
 }

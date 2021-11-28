@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import coursetracking.models.Student;
+import coursetracking.models.TakenCourse;
 import coursetracking.models.Transcript;
 import coursetracking.models.Config;
+import coursetracking.models.Course;
 import coursetracking.utils.Utils;
 
 import com.google.gson.Gson;
@@ -61,12 +63,25 @@ public class App {
         for(int sem = 1; sem <= 8; sem += 2){
             for(int id = num; id < num + 70; id++){
                 data.students.get(index).id = id;
-                data.students.get(index).Serialization();
-                //Gives all lesson according to sem parameter
-                //data.students.get(index).addCourse(course); //its could be in loop
+                getCoursesBySemester(sem, data.students.get(index));
+                data.students.get(index).save();
                 index++;
             }
             num = num - 1000;
+        }
+    }
+    void getCoursesBySemester(int semester, Student st){
+        for(int i = 1; i <= semester; i++){
+            Transcript trscript = new Transcript();
+            //bu aşamada configdeki course arraylistte semestera göre arraylist oluşturacak
+            for(Course c : config.courses){
+                if(semester == c.getSemester()){
+                    TakenCourse tc = new TakenCourse();
+                    tc.setLetterGrade("AA");
+                    trscript.addCourse(tc);
+                }
+            }
+            st.addTranscript(trscript);
         }
     }
 }

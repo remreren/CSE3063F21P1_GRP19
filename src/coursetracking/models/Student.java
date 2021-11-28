@@ -125,10 +125,6 @@ public class Student {
     public float getGPA() {
         return gpa;
     }
-
-    public void Serialization(){
-        //Serialize the object
-    }
   
     public void save() {
         Gson gson = new Gson();
@@ -144,5 +140,9 @@ public class Student {
             System.out.println(e);
         }
 
+    }
+
+    public void addTranscript(Transcript tr){
+        this.transcripts.add(tr);
     }
 }
