@@ -57,6 +57,8 @@ public class App {
     			int rnd = random.nextInt(9);
     			tkc.setLetterGrade(letterNotes[rnd]);
     		}
+    		trscript.calculate();
+    		st.calculate();
     		st.save();
     	}
     	return true;
