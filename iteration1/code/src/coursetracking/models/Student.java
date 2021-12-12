@@ -84,22 +84,20 @@ public class Student {
     }
 
     public boolean canTakeCourse(Course course) {
-        if (semester < course.getSemester())
-            return false;
-
-        if (course.getPrerequisites() != null) {
-            nextpr: for (Course pr : course.getPrerequisites()) {
-                for (Transcript tr : transcripts) {
-                    for (Course c : tr.getCourses()) {
-                        if (c.getCourseName() == pr.getCourseName())
-                            continue nextpr;
-                    }
-                    return false;
-                }
-            }
-        }
-        
-        return !passedCourses.contains(course.courseCode);
+    		if (course.getPrerequisites() != null) {
+    			for (Course pr : course.getPrerequisites()) {
+    				for (Transcript tr : transcripts) {
+    					for (TakenCourse c : tr.getCourses()) {
+    						if (!(c.getCourseCode().equals(pr.getCourseCode()) && c.getLetterGrade().compareTo("DD") <= 0))
+    							continue;
+    						else
+    							return true; // if the prereq. course is passed, returns true
+    					}
+    				}
+    			}
+    			return false; // else returns false
+    		}
+    		return true; // if the course has no prereq. returns true 	
     }
 
     public void calculateSemester() {

@@ -36,12 +36,65 @@ public class App {
         if (Utils.getInstance().getOutputPath().list().length == 0)
             createStudents();
 
-        readStudents();
-        chooseCourses();
-        exams();
+        else {
+			readStudents();
+			gradesOfLastSemester();
+			newTermRegistration();
+		}
     }
+    
+    // assigns grades to the last registered (non-graded yet) courses before new registration
+    public boolean gradesOfLastSemester() { 
+    	for (Student st : data.students) {
+    		int numberOfTrc = st.getTranscripts().size();
+    		if ((config.registrationTerm.equals("fall") && numberOfTrc % 2 != 0) || // if the term parameter isn't
+																					// changed, no grades will be
+																					// assigned
+    				(config.registrationTerm.equals("spring") && numberOfTrc % 2 == 0))
+    			return false;
+    		Transcript trscript = st.getTranscripts().get(numberOfTrc - 1); // last semesterCourses in transcript
+    		for (TakenCourse tkc : trscript.getSemesterCourses()) {
+    			int rnd = random.nextInt(9);
+    			tkc.setLetterGrade(letterNotes[rnd]);
+    		}
+    		trscript.calculate();
+    		st.calculate();
+    		st.save();
+    	}
+    	return true;
+    }
+    
+    // students register new term (term parameter changed in input.json)
+    public boolean newTermRegistration() {
+		TakenCourse tc;
+		for (Student student : data.students) {
+			int lastRegisteredSem = student.getTranscripts().size();
+			if ((config.registrationTerm.equals("fall") && lastRegisteredSem % 2 != 0) || // if the term parameter isn't
+																						// changed, no new registration will
+																						// be done
+					(config.registrationTerm.equals("spring") && lastRegisteredSem % 2 == 0))
+				return false;
+			if (lastRegisteredSem == 8)
+				continue; // (for now) there will be no new registration for students who took all courses
+			int newSem = lastRegisteredSem + 1;
+			Transcript trscript = new Transcript();
+			for (Course c : config.curriculum) {
+				if (newSem == c.getSemester() && student.canTakeCourse(c)) {
+					tc = new TakenCourse(c); // newly registered courses has no grade attribute
+					trscript.addCourse(tc);
+				}
+			}
+			trscript.setSemester(newSem);
+			trscript.calculate();
+			student.addTranscript(trscript);
+			student.calculate();
+			student.save();
+		}
+		return true;
 
-    public void exams() {
+	}
+
+   /* public void exams() {
         for (Student st : data.students) {
             Transcript transcript = new Transcript();
             if (st.getCurrentCourses() != null) {
@@ -55,16 +108,16 @@ public class App {
                 st.save();
             }
         }
-    }
+    }*/
 
-    public void chooseCourses() {
+   /* public void chooseCourses() {
         for (Student st : data.students) {
             for (Course c : config.curriculum) {
                 if (st.canTakeCourse(c) && ((c.getSemester() % 2 == 1) == (config.registrationTerm.toLowerCase().equals("fall"))))
                     st.addCourse(c);
             }
         }
-    }
+    }*/
 
     public void readStudents() throws Exception {
         data.students = new ArrayList<>();
@@ -121,16 +174,23 @@ public class App {
     }
 
     private Random random = new Random(54364564);
-    private String[] letterNotes = { "AA", "BA", "BB", "CB", "CC" };
+    private String[] letterNotes = { "AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF" };
 
     void getCoursesBySemester(int semester, Student st) {
+    	TakenCourse tc;
+		if (config.registrationTerm.toLowerCase().equals("spring"))
+			semester += 1;
         for (int i = 1; i <= semester; i++) {
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
                 if (i == c.getSemester()) {
-                    int rnd = random.nextInt(5);
-                    TakenCourse tc = new TakenCourse(c, letterNotes[rnd]);
-                    trscript.addCourse(tc);
+                	int rnd = random.nextInt(9);
+                	if (i == semester)
+						tc = new TakenCourse(c); // newly registered courses has no grade attribute
+					else
+						tc = new TakenCourse(c, letterNotes[rnd]);
+					if (st.canTakeCourse(c))
+						trscript.addCourse(tc);
                 }
             }
             trscript.setSemester(i);

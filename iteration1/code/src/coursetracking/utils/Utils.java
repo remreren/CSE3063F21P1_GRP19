@@ -27,7 +27,10 @@ public class Utils {
     }
 
     public float getGPAOfLetterGrade(String letterGrade) {
-        return lettersHashMap.get(letterGrade);
+    	if (letterGrade != null)
+			return lettersHashMap.get(letterGrade);
+		else
+			return 0;
     }
 
     public File getResource(String filename){ 
