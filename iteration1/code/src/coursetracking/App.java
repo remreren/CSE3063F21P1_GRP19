@@ -160,7 +160,8 @@ public class App {
 
     public void createStudents() {// Creates Students
         int num = 150121001, index = 0;
-        for (int sem = 1; sem <= 8; sem += 2) {
+        int sem = (config.registrationTerm.toLowerCase().equals("spring"))?2:1;
+        for (; sem <= 8; sem += 2) {
             for (int id = num; id < num + 70; id++) {
                 Student std = new Student(data.students.get(index));
                 std.id = id;
@@ -178,8 +179,6 @@ public class App {
 
     void getCoursesBySemester(int semester, Student st) {
     	TakenCourse tc;
-		if (config.registrationTerm.toLowerCase().equals("spring"))
-			semester += 1;
         for (int i = 1; i <= semester; i++) {
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
