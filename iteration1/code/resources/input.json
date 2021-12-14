@@ -82,7 +82,7 @@
             "credit": 6,
             "prerequisites": [
                 {
-                    "courseCode": "MATH1002"
+                    "courseCode": "MATH1001"
                 }
             ],
             "semester": 2,
