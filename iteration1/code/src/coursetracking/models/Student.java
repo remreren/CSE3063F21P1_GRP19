@@ -89,20 +89,19 @@ public class Student {
     public boolean canTakeCourse(Course course) {
     	if (feedback == null) feedback = new ArrayList<>();	
     	if (course.getPrerequisites() != null) {
-    		nextpr: for (Course pr : course.getPrerequisites()) {
-    	    		boolean prereqIsPassed = false;
+    	nextpr: for (Course pr : course.getPrerequisites()) {
     	    		for (Transcript tr : transcripts) {
     					for (TakenCourse c : tr.getCourses()) {
     						if ((c.getCourseCode().equals(pr.getCourseCode()) && c.getLetterGrade().compareTo("DD") <= 0)) {
-    							prereqIsPassed = true; // means prereq. course is passed
     							continue nextpr; // switches other prereq. if there is
     						}
     					}
     				}
-    				if(prereqIsPassed == false) // if the prereq. isn't passed adds a related feedback
-    					feedback.add("The system did not allow " + course.courseCode + " because student failed prereq. " + pr.courseCode);
+    				// if the prereq. isn't passed adds a related feedback and returns false
+    				feedback.add("The system did not allow " + course.courseCode + " because student failed prereq. " + pr.courseCode);
+    				return false; 
     			}
-    			return feedback.isEmpty(); // if there is no prereq. problem (means feedback arraylist is empty) returns true and vice versa
+    			return true; // if there is no prereq. problem returns true
     		}
     	return true; // if the course has no prereq. returns true 	
     }
