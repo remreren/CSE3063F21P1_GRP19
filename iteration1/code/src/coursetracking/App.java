@@ -47,11 +47,11 @@ public class App {
     public boolean gradesOfLastSemester() { 
     	for (Student st : data.students) {
     		int numberOfTrc = st.getTranscripts().size();
-    		if ((config.registrationTerm.equals("fall") && numberOfTrc % 2 != 0) || // if the term parameter isn't
-																					// changed, no grades will be
-																					// assigned
-    				(config.registrationTerm.equals("spring") && numberOfTrc % 2 == 0))
+    		// if the term parameter isn't changed, no grades will be assigned
+    		if ((config.registrationTerm.toLowerCase().equals("fall") && numberOfTrc % 2 != 0) || 
+    				(config.registrationTerm.toLowerCase().equals("spring") && numberOfTrc % 2 == 0))
     			return false;
+    		
     		Transcript trscript = st.getTranscripts().get(numberOfTrc - 1); // last semesterCourses in transcript
     		for (TakenCourse tkc : trscript.getSemesterCourses()) {
     			int rnd = random.nextInt(9);
@@ -66,21 +66,22 @@ public class App {
     
     // students register new term (term parameter changed in input.json)
     public boolean newTermRegistration() {
-		TakenCourse tc;
 		for (Student student : data.students) {
 			int lastRegisteredSem = student.getTranscripts().size();
-			if ((config.registrationTerm.equals("fall") && lastRegisteredSem % 2 != 0) || // if the term parameter isn't
-																						// changed, no new registration will
-																						// be done
-					(config.registrationTerm.equals("spring") && lastRegisteredSem % 2 == 0))
+			int newSem = lastRegisteredSem + 1;
+			
+			// if the term parameter isn't changed, no new registration will be done
+			if ((config.registrationTerm.toLowerCase().equals("fall") && lastRegisteredSem % 2 != 0) || 
+					(config.registrationTerm.toLowerCase().equals("spring") && lastRegisteredSem % 2 == 0))
 				return false;
+			
 			if (lastRegisteredSem == 8)
 				continue; // (for now) there will be no new registration for students who took all courses
-			int newSem = lastRegisteredSem + 1;
+			
 			Transcript trscript = new Transcript();
 			for (Course c : config.curriculum) {
 				if (newSem == c.getSemester() && student.canTakeCourse(c)) {
-					tc = new TakenCourse(c); // newly registered courses has no grade attribute
+					TakenCourse tc = new TakenCourse(c); // newly registered courses has no grade attribute
 					trscript.addCourse(tc);
 				}
 			}
