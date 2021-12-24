@@ -68,7 +68,9 @@ public class Transcript implements Comparable<Transcript> {
 
     @Override
     public int compareTo(Transcript o) {
-        return o.semester;
+        if (o.semester == this.semester) return 0;
+        else if (o.semester > this.semester) return -1;
+        else return o.semester;
     }   
 
     public void addCourse(TakenCourse tc){
