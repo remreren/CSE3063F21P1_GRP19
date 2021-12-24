@@ -8,6 +8,10 @@ public class TakenCourse extends Course {
         this.letterGrade = letterGrade;
     }
 
+    public TakenCourse(Course c) {
+		super(c);
+	}
+    
     public String getLetterGrade() {
         return letterGrade;
     }

@@ -6,7 +6,10 @@ public class Course {
     protected String courseCode;
     protected String courseName;
     protected int credit;
+    
+    @SerializedName("prerequisites")
     protected Course[] prerequisities;
+    
     protected int semester;
     private String type;
 
@@ -26,6 +29,12 @@ public class Course {
     public String getCourseName() {
         return courseCode;
     }
+    
+
+    public String getCourseCode() {
+		return courseCode;
+	}
+
 
     public int getSemester() {
         return semester;
