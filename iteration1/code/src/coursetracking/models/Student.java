@@ -31,6 +31,7 @@ public class Student {
     private int semester;
     private ArrayList<Course> currentCourses;
     private ArrayList<String> passedCourses;
+    private ArrayList<String> feedback;
 
     private int totalCredit;
 
@@ -83,23 +84,26 @@ public class Student {
         return true;
     }
 
+    /* checks whether the student passed prerequisites of the course
+     and adds feedback into student's json if necessary */
     public boolean canTakeCourse(Course course) {
-        if (semester < course.getSemester())
-            return false;
-
-        if (course.getPrerequisites() != null) {
-            nextpr: for (Course pr : course.getPrerequisites()) {
-                for (Transcript tr : transcripts) {
-                    for (Course c : tr.getCourses()) {
-                        if (c.getCourseName() == pr.getCourseName())
-                            continue nextpr;
-                    }
-                    return false;
-                }
-            }
-        }
-        
-        return !passedCourses.contains(course.courseCode);
+    	if (feedback == null) feedback = new ArrayList<>();	
+    	if (course.getPrerequisites() != null) {
+    	nextpr: for (Course pr : course.getPrerequisites()) {
+    	    		for (Transcript tr : transcripts) {
+    					for (TakenCourse c : tr.getCourses()) {
+    						if ((c.getCourseCode().equals(pr.getCourseCode()) && c.getLetterGrade().compareTo("DD") <= 0)) {
+    							continue nextpr; // switches other prereq. if there is
+    						}
+    					}
+    				}
+    				// if the prereq. isn't passed adds a related feedback and returns false
+    				feedback.add("The system did not allow " + course.courseCode + " because student failed prereq. " + pr.courseCode);
+    				return false; 
+    			}
+    			return true; // if there is no prereq. problem returns true
+    		}
+    	return true; // if the course has no prereq. returns true 	
     }
 
     public void calculateSemester() {

@@ -13,7 +13,8 @@ public class Transcript implements Comparable<Transcript> {
     private int semester;
 
     private ArrayList<TakenCourse> semesterCourses;
-    private float semesterGPA;
+
+	private float semesterGPA;
     private int totalCredit;
 
     public void calculate() {
@@ -60,10 +61,16 @@ public class Transcript implements Comparable<Transcript> {
     public int getTotalCredit() {
         return totalCredit;
     }
+    
+    public ArrayList<TakenCourse> getSemesterCourses() {
+		return semesterCourses;
+	}
 
     @Override
     public int compareTo(Transcript o) {
-        return o.semester;
+        if (o.semester == this.semester) return 0;
+        else if (o.semester > this.semester) return -1;
+        else return o.semester;
     }   
 
     public void addCourse(TakenCourse tc){
