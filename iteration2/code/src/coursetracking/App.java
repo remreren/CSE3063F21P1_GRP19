@@ -12,6 +12,7 @@ import coursetracking.models.TakenCourse;
 import coursetracking.models.Transcript;
 import coursetracking.models.Config;
 import coursetracking.models.Course;
+import coursetracking.models.Elective;
 import coursetracking.utils.Utils;
 
 import com.google.gson.Gson;
@@ -189,6 +190,7 @@ public class App {
             }
             num = num - 1000;
         }
+        System.out.println(config.electives.get(0).type+" "+config.electives.get(0).courses.get(1).getQuotaProblemAmount());//bunun 39-40 gelmesi gerekiyor
     }
 
     private Random random = new Random(54364564);
@@ -199,14 +201,35 @@ public class App {
         for (int i = 1; i <= semester; i++) {
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
+
                 if (i == c.getSemester()) {
-                    int rnd = random.nextInt(9);
-                    if (i == semester)
-                        tc = new TakenCourse(c); // newly registered courses has no grade attribute
-                    else
-                        tc = new TakenCourse(c, letterNotes[rnd]);
+                	int rnd = random.nextInt(9);
+                    boolean newEnrollment = false;
+                    boolean quota = true;
+                	if (i == semester){
+                        if(c.getType() != null){
+                            for( Elective e: config.electives ){
+                                if( e.type.equals(c.getType()) ){//Typelar aynı mı?
+                                    e.setSemester(e.courses.get(1), c.getSemester());//semesterları eşitle
+                                    if(e.isQuotaFull(e.courses.get(1))){//Quota dolu mu
+                                        e.courses.get(1).addQuotaProblem(st);
+                                        quota = false;
+                                    } 
+                                    else c = e.courses.get(1);
+                                }
+                            }
+                        }
+                        
+						tc = new TakenCourse(c); // newly registered courses has no grade attribute
+                        newEnrollment = true;
+                    }
+					else
+						tc = new TakenCourse(c, letterNotes[rnd]);
                     if (st.canTakeCourse(c))
-                        trscript.addCourse(tc);
+                    {
+                        if(quota)trscript.addCourse(tc);
+                        if(newEnrollment && quota) c.enrollStudent(st);
+                    }
                 }
             }
             trscript.setSemester(i);

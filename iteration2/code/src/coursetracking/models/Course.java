@@ -8,8 +8,9 @@ public class Course {
     protected String courseName;
     protected int credit;
     protected ArrayList<Student> prereqProblemStd;
-    protected ArrayList<Student> quotaProblemStd;
+    protected ArrayList<Student> quotaProblemStd; //Quota Problemi yaşayanlar
     protected ArrayList<Student> creditProblemStd;
+    protected ArrayList<Student> enrolledList;
     protected ArrayList<String> feedback;
     
     @SerializedName("prerequisites")
@@ -34,7 +35,9 @@ public class Course {
     	}
     	return feedback;
     }
-
+    public String getType(){
+        return this.type;
+    }
     public Course[] getPrerequisites() {
         return prerequisities;
     }
@@ -43,6 +46,10 @@ public class Course {
         return courseCode;
     }
     
+    public void enrollStudent(Student s){        
+        if (this.enrolledList == null) this.enrolledList = new ArrayList<>();
+        this.enrolledList.add(s);
+    }
 
     public String getCourseCode() {
 		return courseCode;
@@ -55,6 +62,21 @@ public class Course {
 
     public int getCredit() {
         return credit;
+    }
+
+    public int getEnrolledSudentsSize(){ 
+        if (this.enrolledList == null) return 0;
+        return this.enrolledList.size();
+    }
+
+    public void addQuotaProblem(Student s){
+        if (this.quotaProblemStd == null) this.quotaProblemStd = new ArrayList<>();
+        this.quotaProblemStd.add(s);
+    }
+
+    public int getQuotaProblemAmount(){   
+        if (this.quotaProblemStd == null) return 0;
+        return quotaProblemStd.size();
     }
 
     @Override
