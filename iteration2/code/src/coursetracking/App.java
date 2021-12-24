@@ -24,7 +24,7 @@ public class App {
 
     private Config config;
     private Data data;
-    private Gson gson = new Gson();
+    private Gson gson = Utils.getInstance().getGson();
     private ArrayList<Student> students = new ArrayList<>();
     private FilenameFilter transcriptFilter = new FilenameFilter() {
 
