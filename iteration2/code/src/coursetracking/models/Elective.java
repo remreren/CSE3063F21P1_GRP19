@@ -33,4 +33,11 @@ public class Elective {
     public void setSemester(Course c, int semester){
         c.semester = semester;
     }
+
+    public void setNewTerm(){
+        for(Course c: courses){
+            c.quotaProblemStd = null;
+            c.enrolledList = null;
+        }
+    }
 }

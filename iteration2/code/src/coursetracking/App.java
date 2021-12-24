@@ -52,6 +52,7 @@ public class App {
             newTermRegistration();
         }
         writeOutputJson();
+        System.out.println(getFeedbacForElectives());
     }
 
     // assigns grades to the last registered (non-graded yet) courses before new
@@ -93,8 +94,33 @@ public class App {
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
                 if (newSem == c.getSemester() && student.canTakeCourse(c)) {
-                    TakenCourse tc = new TakenCourse(c); // newly registered courses has no grade attribute
-                    trscript.addCourse(tc);
+                    Boolean quota = true;
+                    //Elective Part Starts
+                    setElectivesNull();
+                    if(c.getType() != null){//checks for elective course
+                        Random rand = new Random();
+                        int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
+                        for( Elective e: config.electives ){
+                            if( e.type.equals(c.getType()) ){
+                                e.setSemester(e.courses.get(electiveRandom), c.getSemester());
+                                System.out.println(e.isQuotaFull(e.courses.get(electiveRandom)));
+                                if(e.isQuotaFull(e.courses.get(electiveRandom))){
+                                    e.courses.get(electiveRandom).addQuotaProblem(student);
+                                    quota = false;
+                                } 
+                                else {
+                                  System.out.println("Geliyom"); 
+                                  c = e.courses.get(electiveRandom);  
+                                }
+                            }
+                            
+                        }
+                    }
+                    //Elective Part Ends
+                    if(quota){
+                        TakenCourse tc = new TakenCourse(c); // newly registered courses has no grade attribute
+                        trscript.addCourse(tc);
+                    }
                 }
             }
             trscript.setSemester(newSem);
@@ -102,11 +128,15 @@ public class App {
             student.addTranscript(trscript);
             student.calculate();
             student.save();
+            
         }
         return true;
-
     }
-
+    public void setElectivesNull(){
+        for(Elective e: config.electives){
+            e.setNewTerm();
+        }
+    }
     /*
      * public void exams() {
      * for (Student st : data.students) {
@@ -190,7 +220,7 @@ public class App {
             }
             num = num - 1000;
         }
-        System.out.println(config.electives.get(0).type+" "+config.electives.get(0).courses.get(1).getQuotaProblemAmount());//bunun 39-40 gelmesi gerekiyor
+        System.out.println(getFeedbacForElectives());
     }
 
     private Random random = new Random(54364564);
@@ -201,25 +231,28 @@ public class App {
         for (int i = 1; i <= semester; i++) {
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
-
+                //Checks for semester
                 if (i == c.getSemester()) {
                 	int rnd = random.nextInt(9);
                     boolean newEnrollment = false;
                     boolean quota = true;
                 	if (i == semester){
-                        if(c.getType() != null){
+                        //Elective Part Starts
+                        if(c.getType() != null){//checks for elective course
+                            Random rand = new Random();
+                            int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
                             for( Elective e: config.electives ){
-                                if( e.type.equals(c.getType()) ){//Typelar aynı mı?
-                                    e.setSemester(e.courses.get(1), c.getSemester());//semesterları eşitle
-                                    if(e.isQuotaFull(e.courses.get(1))){//Quota dolu mu
-                                        e.courses.get(1).addQuotaProblem(st);
+                                if( e.type.equals(c.getType()) ){
+                                    e.setSemester(e.courses.get(electiveRandom), c.getSemester());
+                                    if(e.isQuotaFull(e.courses.get(electiveRandom))){
+                                        e.courses.get(electiveRandom).addQuotaProblem(st);
                                         quota = false;
                                     } 
-                                    else c = e.courses.get(1);
+                                    else c = e.courses.get(electiveRandom);
                                 }
                             }
                         }
-                        
+                        //Elective Part Ends
 						tc = new TakenCourse(c); // newly registered courses has no grade attribute
                         newEnrollment = true;
                     }
@@ -237,6 +270,29 @@ public class App {
             st.addTranscript(trscript);
         }
         st.calculate();
+    }
+
+    public int getElectiveQuota(String type){
+        int ret = 0;
+        for(Elective e: config.electives){
+            if(type.equals(e.type)){
+                ret = e.getElectiveQuantity();
+            }
+        }
+        return ret;
+    }
+
+    public String getFeedbacForElectives(){
+        String feedBack = "" ;
+        for(Elective e: config.electives){
+            for(Course c: e.courses){
+                //System.out.println(e.type+" Typte'daki "+c.getCourseCode()+" Dersini "+c.getEnrolledSudentsSize()+" Kişi Aldı");
+                if(c.getQuotaProblemAmount() != 0){
+                    feedBack += c.getQuotaProblemAmount()+" STUDENTS COULD NOT REGISTER FOR "+c.getCourseCode()+" DUE TO THE QUOTA PROBLEMS\n";
+                }
+            }
+        }
+        return feedBack;
     }
 
     // writes a general feedback for all students on the screen and into OUTPUT.json
