@@ -89,6 +89,7 @@ public class Student {
     public boolean canTakeCourse(Course course) {
     	if (feedback == null) feedback = new ArrayList<>();	
     	if (course.getPrerequisites() != null) {
+    		
     	nextpr: for (Course pr : course.getPrerequisites()) {
     	    		for (Transcript tr : transcripts) {
     					for (TakenCourse c : tr.getCourses()) {
@@ -98,6 +99,8 @@ public class Student {
     					}
     				}
     				// if the prereq. isn't passed adds a related feedback and returns false
+    	    		if(course.prereqProblemStd == null) course.prereqProblemStd = new ArrayList<>();
+    	    		course.prereqProblemStd.add(this);
     				feedback.add("The system did not allow " + course.courseCode + " because student failed prereq. " + pr.courseCode);
     				return false; 
     			}

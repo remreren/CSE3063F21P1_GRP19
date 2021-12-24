@@ -1,11 +1,16 @@
 package coursetracking.models;
 
+import java.util.ArrayList;
 import com.google.gson.annotations.SerializedName;
 
 public class Course {
     protected String courseCode;
     protected String courseName;
     protected int credit;
+    protected ArrayList<Student> prereqProblemStd;
+    protected ArrayList<Student> quotaProblemStd;
+    protected ArrayList<Student> creditProblemStd;
+    protected ArrayList<String> feedback;
     
     @SerializedName("prerequisites")
     protected Course[] prerequisities;
@@ -20,6 +25,14 @@ public class Course {
         this.prerequisities = c.prerequisities;
         this.semester = c.semester;
         this.type = c.type;
+    }
+    
+    public ArrayList<String> getFeedback() {
+    	if(feedback == null) feedback = new ArrayList<>();
+    	if(prereqProblemStd != null) {
+    		feedback.add(prereqProblemStd.size() + " STUDENTS COULD NOT REGISTER FOR " + courseCode + " DUE TO THE PREREQ. PROBLEMS");
+    	}
+    	return feedback;
     }
 
     public Course[] getPrerequisites() {
@@ -68,4 +81,5 @@ public class Course {
             return false;
         return true;
     }    
+    
 }

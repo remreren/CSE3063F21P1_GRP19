@@ -1,6 +1,7 @@
 package coursetracking;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -14,6 +15,8 @@ import coursetracking.utils.Utils;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+
+import org.json.*;
 
 /**
  * App
@@ -41,6 +44,7 @@ public class App {
 			gradesOfLastSemester();
 			newTermRegistration();
 		}
+        writeOutputJson(); 
     }
     
     // assigns grades to the last registered (non-graded yet) courses before new registration
@@ -199,6 +203,28 @@ public class App {
         }
         st.calculate();
     }
+    
+    // writes a general feedback for all students on the screen and into OUTPUT.json file under output folder
+    public void writeOutputJson() {
+    	JSONObject outputObject = new JSONObject();
+    	JSONArray feedbackArray = new JSONArray();	
+        for(Course c : config.curriculum) {
+        	for(String s : c.getFeedback()) {
+        		System.out.println(s);
+        		feedbackArray.put(s);
+        	}		    	
+        }
+        outputObject.put("feedback", feedbackArray);
+        try {
+            File output = new File("./output/OUTPUT.json");
+            output.createNewFile();
+            FileWriter writer = new FileWriter(output);
+            writer.write(outputObject.toString());
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }  
 }
 
 class Data {
