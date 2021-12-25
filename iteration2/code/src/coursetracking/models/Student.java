@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.io.File;
 import java.io.FileWriter;
-import java.security.AlgorithmParametersSpi;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import coursetracking.utils.Utils;
@@ -14,25 +14,47 @@ import coursetracking.utils.Utils;
 public class Student {
 
     @SerializedName("id")
+    @Expose
     public int id;
 
     @SerializedName(value = "name", alternate = { "studentName" })
+    @Expose
     public String name;
 
     @SerializedName(value = "surname", alternate = { "studentSurname" })
+    @Expose
     public String surname;
 
     @SerializedName("transcripts")
+    @Expose
     private ArrayList<Transcript> transcripts;
 
+    @SerializedName("currentTranscript")
+    @Expose
     private Transcript currentTranscript;
 
+    @SerializedName("gpa")
+    @Expose
     private float gpa;
+
+    @SerializedName("semester")
+    @Expose
     private int semester;
+
+    @SerializedName("currentCourses")
+    @Expose
     private ArrayList<Course> currentCourses;
+    
+    @SerializedName("passedCourses")
+    @Expose
     private ArrayList<String> passedCourses;
+
+    @SerializedName("feedback")
+    @Expose
     private ArrayList<String> feedback;
 
+    @SerializedName("totalCredit")
+    @Expose
     private int totalCredit;
 
     public Student() {
@@ -145,7 +167,7 @@ public class Student {
         }
     }
 
-    // TODO: read transcript ??
+    // TODO: read transcript ?? not implemented
     public boolean readTranscript() {
         return true;
     }

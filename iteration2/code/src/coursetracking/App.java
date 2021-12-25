@@ -15,6 +15,7 @@ import coursetracking.models.Course;
 import coursetracking.utils.Utils;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -241,6 +242,7 @@ public class App {
 
 class Output {
     @SerializedName("feedback")
+    @Expose
     ArrayList<String> feedbackList;
 
     public void addFeedback(String feedback) {
@@ -252,5 +254,6 @@ class Output {
 
 class Data {
     @SerializedName("fullnames")
+    @Expose
     public ArrayList<Student> students;
 }

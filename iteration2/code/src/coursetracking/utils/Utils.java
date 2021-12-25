@@ -58,7 +58,7 @@ public class Utils {
     public Gson getGson() {
         if (gson == null)
             gson = new GsonBuilder()
-                    // .excludeFieldsWithoutExposeAnnotation()
+                    .excludeFieldsWithoutExposeAnnotation()
                     .create();
         return gson;
     }
