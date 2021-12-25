@@ -17,20 +17,5 @@ public class Config {
     
     @SerializedName("electives")
     @Expose
-    public ArrayList<Course> electives;
-}
-
-class Elective {
-
-    @SerializedName("type")
-    @Expose
-    public String type;
-    
-    @SerializedName("creditRequirement")
-    @Expose
-    public int creditRequirement;
-    
-    @SerializedName("courses")
-    @Expose
-    public ArrayList<Course> courses;
+    public ArrayList<Elective> electives;
 }
