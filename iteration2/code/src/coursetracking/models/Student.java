@@ -145,6 +145,15 @@ public class Student {
         }
     }
 
+    public boolean isStudentEnrolled(Course c){
+        if(currentCourses == null) return false;
+        for(Course currentCourse: this.currentCourses){
+            if(c.getCourseCode() == currentCourse.getCourseCode())
+            return true;
+        }
+        return false;
+    }
+
     // TODO: read transcript ??
     public boolean readTranscript() {
         return true;
