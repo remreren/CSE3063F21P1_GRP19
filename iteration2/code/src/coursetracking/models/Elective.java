@@ -2,12 +2,25 @@ package coursetracking.models;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Elective {
 
+    @SerializedName("type")
+    @Expose
     public String type;
+
+    @SerializedName("creeditRequirement")
+    @Expose
     public int creditRequirement;
+
+    @SerializedName("quota")
+    @Expose
     public int quota;
 
+    @SerializedName("courses")
+    @Expose
     public ArrayList<Course> courses;
     
     public int getElectiveQuantity(){
