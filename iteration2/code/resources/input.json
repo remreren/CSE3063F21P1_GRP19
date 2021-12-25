@@ -473,7 +473,7 @@
         {
             "type": "NTE",
             "creditRequirement": null,
-            "quota": 15,
+            "quota": 5,
             "courses": [
                 {
                     "courseCode": "BUS1003",
@@ -530,7 +530,7 @@
         {
             "type": "TE",
             "creditRequirement": 145,
-            "quota": 30,
+            "quota": 5,
             "courses": [
                 {
                     "courseCode": "CSE4026",
@@ -587,7 +587,7 @@
         {
             "type": "FTE",
             "creditRequirement": 145,
-            "quota": 25,
+            "quota": 5,
             "courses": [
                 {
                     "courseCode": "BIOE4072",

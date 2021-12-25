@@ -79,6 +79,10 @@ public class Course {
         return quotaProblemStd.size();
     }
 
+    public void setType(String type){
+        this.type = type;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

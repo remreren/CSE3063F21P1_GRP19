@@ -61,8 +61,8 @@ public class App {
         for (Student st : data.students) {
             int numberOfTrc = st.getTranscripts().size();
             // if the term parameter isn't changed, no grades will be assigned
-            if ((config.registrationTerm.toLowerCase().equals("fall") && numberOfTrc % 2 != 0) ||
-                    (config.registrationTerm.toLowerCase().equals("spring") && numberOfTrc % 2 == 0))
+            if ((config.registrationTerm.toLowerCase().equals("fall") && numberOfTrc % 2 != 0 && numberOfTrc!=8) ||
+                    (config.registrationTerm.toLowerCase().equals("spring") && numberOfTrc % 2 == 0 && numberOfTrc!=8))
                 return false;
 
             Transcript trscript = st.getTranscripts().get(numberOfTrc - 1); // last semesterCourses in transcript
@@ -79,13 +79,14 @@ public class App {
 
     // students register new term (term parameter changed in input.json)
     public boolean newTermRegistration() {
+        setElectivesNull();//Electives new term
         for (Student student : data.students) {
             int lastRegisteredSem = student.getTranscripts().size();
             int newSem = lastRegisteredSem + 1;
 
             // if the term parameter isn't changed, no new registration will be done
-            if ((config.registrationTerm.toLowerCase().equals("fall") && lastRegisteredSem % 2 != 0) ||
-                    (config.registrationTerm.toLowerCase().equals("spring") && lastRegisteredSem % 2 == 0))
+            if ((config.registrationTerm.toLowerCase().equals("fall") && lastRegisteredSem % 2 != 0 && lastRegisteredSem!=8 ) ||
+                    (config.registrationTerm.toLowerCase().equals("spring") && lastRegisteredSem % 2 == 0 && lastRegisteredSem!=8))
                 return false;
 
             if (lastRegisteredSem == 8)
@@ -93,33 +94,34 @@ public class App {
 
             Transcript trscript = new Transcript();
             for (Course c : config.curriculum) {
+                Boolean quota = true;
+                Random rand = new Random();
                 if (newSem == c.getSemester() && student.canTakeCourse(c)) {
-                    Boolean quota = true;
+                    quota = true;
                     //Elective Part Starts
-                    setElectivesNull();
                     if(c.getType() != null){//checks for elective course
-                        Random rand = new Random();
-                        int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
                         for( Elective e: config.electives ){
                             if( e.type.equals(c.getType()) ){
+                                int electiveRandom = rand.nextInt(getElectiveQuota(e.type));//creates for random course inside electives
                                 e.setSemester(e.courses.get(electiveRandom), c.getSemester());
-                                System.out.println(e.isQuotaFull(e.courses.get(electiveRandom)));
                                 if(e.isQuotaFull(e.courses.get(electiveRandom))){
                                     e.courses.get(electiveRandom).addQuotaProblem(student);
+                                    //c = e.courses.get(electiveRandom);
                                     quota = false;
                                 } 
                                 else {
-                                  System.out.println("Geliyom"); 
-                                  c = e.courses.get(electiveRandom);  
+                                    c = e.courses.get(electiveRandom);
+                                    c.setType(e.type);
                                 }
                             }
-                            
                         }
                     }
                     //Elective Part Ends
+                    TakenCourse tc;
                     if(quota){
-                        TakenCourse tc = new TakenCourse(c); // newly registered courses has no grade attribute
+                        tc = new TakenCourse(c); // newly registered courses has no grade attribute
                         trscript.addCourse(tc);
+                        c.enrollStudent(student);
                     }
                 }
             }
@@ -258,9 +260,10 @@ public class App {
                     }
 					else
 						tc = new TakenCourse(c, letterNotes[rnd]);
+
                     if (st.canTakeCourse(c))
                     {
-                        if(quota)trscript.addCourse(tc);
+                        if(quota) trscript.addCourse(tc);
                         if(newEnrollment && quota) c.enrollStudent(st);
                     }
                 }
