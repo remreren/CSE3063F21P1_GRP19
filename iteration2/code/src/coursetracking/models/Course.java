@@ -48,7 +48,6 @@ public class Course {
             }
             fb += ")";
             feedback.add(fb);
-            System.out.println(fb);
         }
     	return feedback;
     }
