@@ -89,6 +89,7 @@ public class Student {
     public boolean canTakeCourse(Course course) {
     	if (feedback == null) feedback = new ArrayList<>();	
     	if (course.getPrerequisites() != null) {
+    		
     	nextpr: for (Course pr : course.getPrerequisites()) {
     	    		for (Transcript tr : transcripts) {
     					for (TakenCourse c : tr.getCourses()) {
@@ -98,12 +99,19 @@ public class Student {
     					}
     				}
     				// if the prereq. isn't passed adds a related feedback and returns false
+    	    		if(course.prereqProblemStd == null) course.prereqProblemStd = new ArrayList<>();
+    	    		course.prereqProblemStd.add(this);
     				feedback.add("The system did not allow " + course.courseCode + " because student failed prereq. " + pr.courseCode);
     				return false; 
     			}
     			return true; // if there is no prereq. problem returns true
     		}
     	return true; // if the course has no prereq. returns true 	
+    }
+
+    public void addFeedbackQuota(Course course) {
+    	if (feedback == null) feedback = new ArrayList<>();
+        feedback.add("The student could not register for "+ course.getCourseCode() +" because of a quota problem");	
     }
 
     public void calculateSemester() {
@@ -142,7 +150,15 @@ public class Student {
         }
     }
 
-    // TODO: read transcript ??
+    public boolean isStudentEnrolled(Course c){
+        if(currentCourses == null) return false;
+        for(Course currentCourse: this.currentCourses){
+            if(c.getCourseCode() == currentCourse.getCourseCode())
+            return true;
+        }
+        return false;
+    }
+
     public boolean readTranscript() {
         return true;
     }

@@ -1,5 +1,5 @@
 {
-    "registrationTerm": "FALL",
+    "registrationTerm": "fall",
     "curriculum": [
         {
             "courseCode": "ATA121",
@@ -473,198 +473,171 @@
         {
             "type": "NTE",
             "creditRequirement": null,
+            "quota": 5,
             "courses": [
                 {
                     "courseCode": "BUS1003",
                     "courseName": "Entrepreneurship and Innovation",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "BUS1004",
                     "courseName": "Strategic Entrepreneurship",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "BUS2005",
                     "courseName": "International Business",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "CAS1001",
                     "courseName": "Self Management",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "CAS1010",
                     "courseName": "Our Biosphere",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "CAS1060",
                     "courseName": "Geometric Origami",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "HR1013",
                     "courseName": "Career Development",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "MGT1021",
                     "courseName": "Design, Innovation and Entrepreneurship",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "YDA1001",
                     "courseName": "German for Beginners",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 },
                 {
                     "courseCode": "YDF1001",
                     "courseName": "French for Beginners",
-                    "credit": 3,
-                    "quota": 90
+                    "credit": 3
                 }
             ]
         },
         {
             "type": "TE",
             "creditRequirement": 145,
+            "quota": 5,
             "courses": [
                 {
                     "courseCode": "CSE4026",
                     "courseName": "Introduction to Robotics and Control Theory",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4034",
                     "courseName": "Advanced Unix Programming",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4061",
                     "courseName": "Compiler Design",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4083",
                     "courseName": "Computer Graphics",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4040",
                     "courseName": "Cloud Computing",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4044",
                     "courseName": "Software Project Management",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4059",
                     "courseName": "Internet Programming",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4082",
                     "courseName": "Artificial Intelligence",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4034",
                     "courseName": "Advanced Unix Programming",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4086",
                     "courseName": "Mobile Device Programming",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 }
             ]
         },
         {
             "type": "FTE",
             "creditRequirement": 145,
+            "quota": 5,
             "courses": [
                 {
                     "courseCode": "BIOE4072",
                     "courseName": "Planning and Management of Research",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CHE4060",
                     "courseName": "Cost Management in Chemical Industries",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CHE4068",
                     "courseName": "Financial Engineering",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "CSE4056",
                     "courseName": "Management of Information Systems",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "ENVE4062",
                     "courseName": "Energy and the Environment",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "IE4087",
                     "courseName": "Introduction to Total Quality Management",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "ME4022",
                     "courseName": "Control Systems",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "ME4033",
                     "courseName": "Designing Quality Products",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "MGT4086",
                     "courseName": "Managing Engineering and Technology",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 },
                 {
                     "courseCode": "ME4051",
                     "courseName": "Automotive Engineering",
-                    "credit": 5,
-                    "quota": 90
+                    "credit": 5
                 }
             ]
         }
