@@ -109,6 +109,11 @@ public class Student {
     	return true; // if the course has no prereq. returns true 	
     }
 
+    public void addFeedbackQuota(Course course) {
+    	if (feedback == null) feedback = new ArrayList<>();
+        feedback.add("The student could not register for "+ course.getCourseCode() +" because of a quota problem");	
+    }
+
     public void calculateSemester() {
         float cumulative = 0f;
         int cumulativeCourseCredit = 0;
@@ -154,7 +159,6 @@ public class Student {
         return false;
     }
 
-    // TODO: read transcript ??
     public boolean readTranscript() {
         return true;
     }

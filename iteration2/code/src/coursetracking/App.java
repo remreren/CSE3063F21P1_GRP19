@@ -52,7 +52,6 @@ public class App {
             newTermRegistration();
         }
         writeOutputJson();
-        System.out.println(getFeedbacForElectives());
     }
 
     // assigns grades to the last registered (non-graded yet) courses before new
@@ -79,7 +78,7 @@ public class App {
 
     // students register new term (term parameter changed in input.json)
     public boolean newTermRegistration() {
-        setElectivesNull();//Electives new term
+        //setElectivesNull();//Electives new term
         for (Student student : data.students) {
             int lastRegisteredSem = student.getTranscripts().size();
             int newSem = lastRegisteredSem + 1;
@@ -93,7 +92,7 @@ public class App {
                 continue; // (for now) there will be no new registration for students who took all courses
 
             Transcript trscript = new Transcript();
-            for (Course c : config.curriculum) {
+            for (Course c : config.curriculum)   {
                 Boolean quota = true;
                 Random rand = new Random();
                 if (newSem == c.getSemester() && student.canTakeCourse(c)) {
@@ -109,7 +108,7 @@ public class App {
                                 e.setSemester(e.courses.get(electiveRandom), c.getSemester());
                                 if(e.isQuotaFull(e.courses.get(electiveRandom))){
                                     e.courses.get(electiveRandom).addQuotaProblem(student);
-                                    //c = e.courses.get(electiveRandom);
+                                    student.addFeedbackQuota(e.courses.get(electiveRandom));
                                     quota = false;
                                 } 
                                 else {
@@ -225,7 +224,6 @@ public class App {
             }
             num = num - 1000;
         }
-        System.out.println(getFeedbacForElectives());
     }
 
     private Random random = new Random(54364564);
@@ -251,6 +249,7 @@ public class App {
                                     e.setSemester(e.courses.get(electiveRandom), c.getSemester());
                                     if(e.isQuotaFull(e.courses.get(electiveRandom))){
                                         e.courses.get(electiveRandom).addQuotaProblem(st);
+                                        st.addFeedbackQuota(e.courses.get(electiveRandom));
                                         quota = false;
                                     } 
                                     else c = e.courses.get(electiveRandom);
@@ -288,19 +287,6 @@ public class App {
         return ret;
     }
 
-    public String getFeedbacForElectives(){
-        String feedBack = "" ;
-        for(Elective e: config.electives){
-            for(Course c: e.courses){
-                //System.out.println(e.type+" Typte'daki "+c.getCourseCode()+" Dersini "+c.getEnrolledSudentsSize()+" Kişi Aldı");
-                if(c.getQuotaProblemAmount() != 0){
-                    feedBack += c.getQuotaProblemAmount()+" STUDENTS COULD NOT REGISTER FOR "+c.getCourseCode()+" DUE TO THE QUOTA PROBLEMS\n";
-                }
-            }
-        }
-        return feedBack;
-    }
-
     // writes a general feedback for all students on the screen and into OUTPUT.json
     // file under output folder
     public void writeOutputJson() {
@@ -309,6 +295,15 @@ public class App {
             for (String s : c.getFeedback()) {
                 System.out.println(s);
                 outputObj.addFeedback(s);
+            }
+        }
+        for(Elective e: config.electives)
+        {
+            for(Course c: e.courses){
+                for(String s: c.getFeedback()){
+                    System.out.println(s);
+                    outputObj.addFeedback(s);
+                }
             }
         }
         try {

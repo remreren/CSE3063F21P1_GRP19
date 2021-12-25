@@ -9,7 +9,6 @@ public class Course {
     protected int credit;
     protected ArrayList<Student> prereqProblemStd;
     protected ArrayList<Student> quotaProblemStd; //Quota Problemi yaşayanlar
-    protected ArrayList<Student> creditProblemStd;
     protected ArrayList<Student> enrolledList;
     protected ArrayList<String> feedback;
     
@@ -30,11 +29,30 @@ public class Course {
     
     public ArrayList<String> getFeedback() {
     	if(feedback == null) feedback = new ArrayList<>();
+        String fb ="";
     	if(prereqProblemStd != null) {
-    		feedback.add(prereqProblemStd.size() + " STUDENTS COULD NOT REGISTER FOR " + courseCode + " DUE TO THE PREREQ. PROBLEMS");
+            fb += prereqProblemStd.size() + " STUDENTS COULD NOT REGISTER FOR " + courseCode + " DUE TO THE PREREQ. PROBLEMS";
+            fb += "( ";
+            for(Student s: prereqProblemStd){
+                fb += s.id+" ";
+            }
+            fb += ")";
+    		feedback.add(fb);
     	}
+        fb="";
+        if(getQuotaProblemAmount() != 0){
+            fb += getQuotaProblemAmount()+" STUDENTS COULD NOT REGISTER FOR "+courseCode+" DUE TO THE QUOTA PROBLEMS";
+            fb += "( ";
+            for(Student st: getQuotaStudent()){
+                fb+=st.id + " ";
+            }
+            fb += ")";
+            feedback.add(fb);
+            System.out.println(fb);
+        }
     	return feedback;
     }
+
     public String getType(){
         return this.type;
     }
@@ -55,6 +73,9 @@ public class Course {
 		return courseCode;
 	}
 
+    public ArrayList<Student> getQuotaStudent(){
+        return this.quotaProblemStd;
+    }
 
     public int getSemester() {
         return semester;

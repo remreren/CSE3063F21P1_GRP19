@@ -7,8 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import coursetracking.utils.Utils;
 
 public class Transcript implements Comparable<Transcript> {
-    private int id;
-
+    
     @SerializedName("semester")
     private int semester;
 
