@@ -103,7 +103,7 @@ public class App {
                         for( Elective e: config.electives ){
                             if( e.type.equals(c.getType()) ){
                                 int electiveRandom = rand.nextInt(getElectiveQuota(e.type));
-                                while( student.isStudentEnrolled(e.courses.get(electiveRandom)) ){
+                                while(student.isStudentEnrolled(e.courses.get(electiveRandom)) ){
                                     electiveRandom = rand.nextInt(getElectiveQuota(e.type));//creates for random course inside electives 
                                 }
                                 e.setSemester(e.courses.get(electiveRandom), c.getSemester());
