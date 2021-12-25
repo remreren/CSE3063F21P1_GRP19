@@ -1,6 +1,12 @@
 package coursetracking.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class TakenCourse extends Course {
+
+    @SerializedName(value = "letterGrade")
+    @Expose
     private String letterGrade = null;
 
     public TakenCourse(Course c, String letterGrade) {

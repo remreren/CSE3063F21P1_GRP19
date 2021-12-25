@@ -16,6 +16,7 @@ import coursetracking.models.Elective;
 import coursetracking.utils.Utils;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -25,7 +26,7 @@ public class App {
 
     private Config config;
     private Data data;
-    private Gson gson = new Gson();
+    private Gson gson = Utils.getInstance().getGson();
     private ArrayList<Student> students = new ArrayList<>();
     private FilenameFilter transcriptFilter = new FilenameFilter() {
 
@@ -321,6 +322,7 @@ public class App {
 
 class Output {
     @SerializedName("feedback")
+    @Expose
     ArrayList<String> feedbackList;
 
     public void addFeedback(String feedback) {
@@ -332,5 +334,6 @@ class Output {
 
 class Data {
     @SerializedName("fullnames")
+    @Expose
     public ArrayList<Student> students;
 }

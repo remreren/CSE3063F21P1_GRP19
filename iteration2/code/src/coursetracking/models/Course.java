@@ -1,21 +1,50 @@
 package coursetracking.models;
 
 import java.util.ArrayList;
+
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Course {
+    
+    @SerializedName("courseCode")
+    @Expose
     protected String courseCode;
+
+    @SerializedName("courseName")
+    @Expose
     protected String courseName;
+
+    @SerializedName("credit")
+    @Expose
     protected int credit;
+
+    @SerializedName("prereqProblemStd")
+    @Expose
     protected ArrayList<Student> prereqProblemStd;
-    protected ArrayList<Student> quotaProblemStd; //Quota Problemi yaşayanlar
+    
+    @SerializedName("quotaProblemStd")
+    @Expose
+    protected ArrayList<Student> quotaProblemStd;
+    
+    @SerializedName("enrolledList")
+    @Expose
     protected ArrayList<Student> enrolledList;
+    
+    @SerializedName("feedback")
+    @Expose
     protected ArrayList<String> feedback;
     
     @SerializedName("prerequisites")
+    @Expose(serialize = false)
     protected Course[] prerequisities;
     
+    @SerializedName("semester")
+    @Expose(serialize = false)
     protected int semester;
+
+    @SerializedName("type")
+    @Expose(serialize = false)
     private String type;
 
     public Course(Course c) {

@@ -2,6 +2,7 @@ package coursetracking.models;
 
 import java.util.ArrayList;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import coursetracking.utils.Utils;
@@ -9,11 +10,19 @@ import coursetracking.utils.Utils;
 public class Transcript implements Comparable<Transcript> {
     
     @SerializedName("semester")
+    @Expose
     private int semester;
 
+    @SerializedName("semesterCourses")
+    @Expose
     private ArrayList<TakenCourse> semesterCourses;
 
+    @SerializedName("semesterGPA")
+    @Expose
 	private float semesterGPA;
+
+    @SerializedName("totalCredit")
+    @Expose
     private int totalCredit;
 
     public void calculate() {
