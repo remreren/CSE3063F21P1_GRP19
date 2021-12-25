@@ -1,5 +1,6 @@
 {
     "registrationTerm": "fall",
+    "studentGeneration": true,
     "curriculum": [
         {
             "courseCode": "ATA121",

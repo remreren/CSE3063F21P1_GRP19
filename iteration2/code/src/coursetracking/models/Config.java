@@ -6,6 +6,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Config {
+	
+	@SerializedName("studentGeneration")
+	@Expose
+	public boolean studentGeneration;
     
     @SerializedName("registrationTerm")
     @Expose

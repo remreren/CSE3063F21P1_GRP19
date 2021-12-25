@@ -45,7 +45,7 @@ public class App {
     public void start() throws Exception {
         readInput();
         readNames();
-        if (Utils.getInstance().getOutputPath().listFiles(transcriptFilter).length == 0)
+        if (Utils.getInstance().getOutputPath().listFiles(transcriptFilter).length == 0 || config.studentGeneration)
             createStudents();
         else {
             readStudents();
