@@ -96,12 +96,12 @@ public class ControlCenter {
 	                    if(c.getType() != null){//checks for elective course
 	                        for( Elective e: config.electives ){
 	                            if( e.type.equals(c.getType()) ){
-	                                int electiveRandom = rand.nextInt(getElectiveQuota(e.type));
+	                            	int electiveRandom = rand.nextInt(getElectiveQuota(e.type));
 	                                while( student.isStudentEnrolled(e.courses.get(electiveRandom)) ){
 	                                    electiveRandom = rand.nextInt(getElectiveQuota(e.type));//creates for random course inside electives 
 	                                }
-	                                e.setSemester(e.courses.get(electiveRandom), c.getSemester());
 	                                if(e.isQuotaFull(e.courses.get(electiveRandom))){
+										e.setSemester(e.courses.get(electiveRandom), c.getSemester());
 	                                    e.courses.get(electiveRandom).addQuotaProblem(student);
 	                                    student.addFeedbackQuota(e.courses.get(electiveRandom));
 	                                    quota = false;
@@ -238,9 +238,12 @@ public class ControlCenter {
 	                        //Elective Part Starts
 	                        if(c.getType() != null){//checks for elective course
 	                            Random rand = new Random();
-	                            int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
 	                            for( Elective e: config.electives ){
 	                                if( e.type.equals(c.getType()) ){
+										int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
+										while( st.isStudentEnrolled(e.courses.get(electiveRandom)) ){
+											electiveRandom = rand.nextInt(getElectiveQuota(e.type));//creates for random course inside electives 
+										}
 	                                    e.setSemester(e.courses.get(electiveRandom), c.getSemester());
 	                                    if(e.isQuotaFull(e.courses.get(electiveRandom))){
 	                                        e.courses.get(electiveRandom).addQuotaProblem(st);
