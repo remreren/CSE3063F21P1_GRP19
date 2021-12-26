@@ -234,27 +234,27 @@ public class ControlCenter {
 	                	int rnd = random.nextInt(9);
 	                    boolean newEnrollment = false;
 	                    boolean quota = true;
+						//Elective Part Starts
+						if(c.getType() != null){//checks for elective course
+							Random rand = new Random();
+							for( Elective e: config.electives ){
+								if( e.type.equals(c.getType()) ){
+									int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
+									while( st.isStudentEnrolled(e.courses.get(electiveRandom)) ){
+										electiveRandom = rand.nextInt(getElectiveQuota(e.type));//creates for random course inside electives 
+									}
+									e.setSemester(e.courses.get(electiveRandom), c.getSemester());
+									if(e.isQuotaFull(e.courses.get(electiveRandom))){
+										e.courses.get(electiveRandom).addQuotaProblem(st);
+										st.addFeedbackQuota(e.courses.get(electiveRandom));
+										quota = false;
+									} 
+									else c = e.courses.get(electiveRandom);
+								}
+							}
+						}
+						//Elective Part Ends
 	                	if (i == semester){
-	                        //Elective Part Starts
-	                        if(c.getType() != null){//checks for elective course
-	                            Random rand = new Random();
-	                            for( Elective e: config.electives ){
-	                                if( e.type.equals(c.getType()) ){
-										int electiveRandom = rand.nextInt(getElectiveQuota(c.getType()));//creates for random course inside electives
-										while( st.isStudentEnrolled(e.courses.get(electiveRandom)) ){
-											electiveRandom = rand.nextInt(getElectiveQuota(e.type));//creates for random course inside electives 
-										}
-	                                    e.setSemester(e.courses.get(electiveRandom), c.getSemester());
-	                                    if(e.isQuotaFull(e.courses.get(electiveRandom))){
-	                                        e.courses.get(electiveRandom).addQuotaProblem(st);
-	                                        st.addFeedbackQuota(e.courses.get(electiveRandom));
-	                                        quota = false;
-	                                    } 
-	                                    else c = e.courses.get(electiveRandom);
-	                                }
-	                            }
-	                        }
-	                        //Elective Part Ends
 							tc = new TakenCourse(c); // newly registered courses has no grade attribute
 	                        newEnrollment = true;
 	                    }
