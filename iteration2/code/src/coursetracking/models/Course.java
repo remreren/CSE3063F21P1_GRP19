@@ -63,7 +63,7 @@ public class Course {
             fb += prereqProblemStd.size() + " STUDENTS COULD NOT REGISTER FOR " + courseCode + " DUE TO THE PREREQ. PROBLEMS";
             fb += "( ";
             for(Student s: prereqProblemStd){
-                fb += s.id+" ";
+                fb += s.getId() + " ";
             }
             fb += ")";
     		feedback.add(fb);
@@ -73,7 +73,7 @@ public class Course {
             fb += getQuotaProblemAmount()+" STUDENTS COULD NOT REGISTER FOR "+courseCode+" DUE TO THE QUOTA PROBLEMS";
             fb += "( ";
             for(Student st: getQuotaStudent()){
-                fb+=st.id + " ";
+                fb+=st.getId() + " ";
             }
             fb += ")";
             feedback.add(fb);

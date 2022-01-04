@@ -136,35 +136,6 @@ public class ControlCenter {
 	            e.setNewTerm();
 	        }
 	    }
-	    /*
-	     * public void exams() {
-	     * for (Student st : data.students) {
-	     * Transcript transcript = new Transcript();
-	     * if (st.getCurrentCourses() != null) {
-	     * for (Course c : st.getCurrentCourses()) {
-	     * int rnd = random.nextInt(5);
-	     * transcript.addCourse(new TakenCourse(c, letterNotes[rnd]));
-	     * }
-	     * transcript.calculate();
-	     * st.setCurrentTrancript(transcript);
-	     * st.calculate();
-	     * st.save();
-	     * }
-	     * }
-	     * }
-	     */
-
-	    /*
-	     * public void chooseCourses() {
-	     * for (Student st : data.students) {
-	     * for (Course c : config.curriculum) {
-	     * if (st.canTakeCourse(c) && ((c.getSemester() % 2 == 1) ==
-	     * (config.registrationTerm.toLowerCase().equals("fall"))))
-	     * st.addCourse(c);
-	     * }
-	     * }
-	     * }
-	     */
 
 	    public void readStudents() throws Exception {
 	        data.students = new ArrayList<>();
@@ -211,7 +182,7 @@ public class ControlCenter {
 	        for (; sem <= 8; sem += 2) {
 	            for (int id = num; id < num + 70; id++) {
 	                Student std = new Student(data.students.get(index));
-	                std.id = id;
+	                std.setId(id);
 	                getCoursesBySemester(sem, std);
 	                students.add(std);
 	                std.save();

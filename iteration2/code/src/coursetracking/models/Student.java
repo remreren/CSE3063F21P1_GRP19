@@ -15,15 +15,15 @@ public class Student {
 
     @SerializedName("id")
     @Expose
-    public int id;
+    private int id;
 
     @SerializedName(value = "name", alternate = { "studentName" })
     @Expose
-    public String name;
+    private String name;
 
     @SerializedName(value = "surname", alternate = { "studentSurname" })
     @Expose
-    public String surname;
+    private String surname;
 
     @SerializedName("transcripts")
     @Expose
@@ -215,6 +215,14 @@ public class Student {
 
     public void setCurrentTrancript(Transcript currentTranscript) {
         this.currentTranscript = currentTranscript;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void save() {
