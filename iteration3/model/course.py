@@ -16,6 +16,29 @@ class Course(object):
         self.std_prereq_problem: List[Student] = []
         self.feedback: List[str] = []
 
+    def getFeedback() -> List:
+        if(feedback is None):
+            feedback = []
+        
+        fb = ""
+        if(prereqProblemStd != None):
+
+            fb += len(prereqProblemStd) + " STUDENTS COULD NOT REGISTER FOR " + courseCode + " DUE TO THE PREREQ. PROBLEMS"
+            fb += "("
+            for s in prereqProblemStd:
+                fb += s.getId() + " "
+            fb +=")"
+            feedback.add(fb)
+        fb=""
+        if(getQuotaProblemAmount != 0):
+            fb += getQuotaProblemAmount()+" STUDENTS COULD NOT REGISTER FOR "+courseCode+" DUE TO THE QUOTA PROBLEMS"
+            fb += "( "
+            for st in getQuotaStudent():
+                fb += st.getId() + " "
+            fb += ")"
+            feedback.add(fb)
+        return feedback
+
     def enroll_student(self, student: Student):
         self.enrolled_list.append(student)
 
