@@ -32,3 +32,6 @@ class Elective(Course):
 
     def __str__(self):
         return f"Elective(type={self.course_type}, credit_requirement={self.credit_requirement}, quota={self.quota}, courses={self.courses})"
+
+    def __repr__(self):
+        return f"Elective(type={self.course_type}, credit_requirement={self.credit_requirement}, quota={self.quota}, courses={self.courses})"

@@ -27,3 +27,6 @@ class Course(object):
     
     def __str__(self):
         return f"Course(course_code={self.course_code}, course_name={self.course_name}, credit={self.credit}, semester={self.semester}, course_type={self.course_type}"
+    
+    def __repr__(self):
+        return f"Course(course_code={self.course_code}, course_name={self.course_name}, credit={self.credit}, semester={self.semester}, course_type={self.course_type}"
