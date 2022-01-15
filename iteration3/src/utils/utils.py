@@ -1,4 +1,8 @@
 from typing import List
+
+from idna import core
+from model.config import Config
+from model.course import Course
 from model.elective import Elective
 from model.student import Student
 
@@ -41,3 +45,51 @@ def convert_dict_to_elective(elect: dict) -> Elective:
         courses = elect["courses"]
 
     return Elective(course_type, credit_requirement, quota, courses)
+
+def convert_dict_to_course(cours: dict) -> Course:
+    course_code: str
+    course_name: str
+    credit: int
+    semester: int
+    course_type: str
+    prerequisites: List[Course] = []
+    
+    if "courseCode" in cours:
+        course_code = cours["courseCode"]
+
+    if "courseName" in cours:
+        course_name = cours["courseName"]
+    
+    if "credit" in cours:
+        credit = cours["credit"]
+
+    if "semester" in cours:
+        semester = cours["semester"]
+
+    if "type" in cours:
+        course_type = cours["type"]
+
+    if "prerequisites" in cours:
+        prerequisites = [course for course in cours["prerequisites"]]
+
+    return Course(course_code, course_name, credit, prerequisites, semester, course_type)
+
+def convert_dict_to_config(conf: dict) -> Config:
+    student_generation: bool
+    registration_term: str
+    curriculum: List[Course]
+    electives: List[Elective]
+
+    if "studentGeneration" in conf:
+        student_generation = conf["studentGeneration"]
+
+    if "registrationTerm" in conf:
+        registration_term = conf["registrationTerm"]
+
+    if "curriculum" in conf:
+        curriculum = [convert_dict_to_course(course) for course in conf["curriculum"]]
+
+    if "electives" in conf:
+        electives = [convert_dict_to_elective(elect) for elect in conf["electives"]]
+    
+    return Config(student_generation, registration_term, curriculum, electives)
