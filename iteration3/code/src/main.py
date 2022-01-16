@@ -16,7 +16,7 @@ def test(inp):
 with open("./input.json") as inp:
     test = json.load(inp)
     print(convert_dict_to_config(test))
-    # print("studentGeneration" in test)
+    # print("studentGeneration" in test)s
     # conf: Config = json.load(inp, object_hook=convert_dict_to_config)
     # print(conf)
 
