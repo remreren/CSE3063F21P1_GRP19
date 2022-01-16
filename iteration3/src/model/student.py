@@ -22,14 +22,13 @@ class Student(object):
         self.__totalCredit: int = 0
         self.__currentTranscript: Transcript = None
 
-    def calculate(self) -> None:
+    def calculate(self):
         self.sortTranscript()
         self.calculatePassedCourses()
         self.calculateTotalCredit()
         self.calculateSemester()
 
-    def addCourse(self, course: Course) -> bool:  # Course not implemented
-        # constructorda boş array olarak başlatıyoruz bu check e gerek var mı?
+    def addCourse(self, course: Course) -> bool:
         if(self.__currentCourses is None):
             self.__currentCourses = []
 
@@ -37,30 +36,15 @@ class Student(object):
             return False
 
         if(not self.canTakeCourse(course)):
-            # TODO not read canTakeCourse fix it!
             return False
 
         self.__currentCourses.append(course)
-        return True
-
-    def register(self) -> bool:
-        tr = Transcript()  # Trancript not implemented
-
-        for c in self.__currentCourses:
-            tr.addCourse(TakenCourse(c, None))
-
-        self.__currentTranscript = tr     # currentTransript ???
-        self.save()
-
         return True
 
     """checks whether the student passed prerequisites of the course
      and adds feedback into student's json if necessary"""
 
     def canTakeCourse(self, course: Course) -> bool:
-        if(self.__feedback is None):
-            self.__feedback = []
-
         if(course.getPrerequisites()):
             nextpr = False
             for pr in List[Course](course.getPrerequisites()):
@@ -77,16 +61,10 @@ class Student(object):
                 
                 # if the prereq. isn't passed adds a related feedback and returns false
                 course.addPrereqProblem(self)
-                self.__feedback.append("The system did not allow " + course.getCourseCode(),
-                                " because student failed prereq. " + pr.getCourseCode())
+                self.addFeedbackPrereq(course, pr)
 
                 return False  # if there is no prereq. problem returns true
             return True  # if the course has no prereq. returns true
-
-    def addFeedbackQuota(self, course: Course) -> None:
-        if(self.__feedback is None):
-            self.__feedback = []
-        self.__feedback.append("The student could not register for " + course.getCourseCode() + " because of a quota problem")
 
     def calculateSemester(self):
         cumulative: float = 0.0
@@ -100,7 +78,7 @@ class Student(object):
                 break
             self.__semester = t.getSemester()
 
-    def calculateTotalCredit(self) -> None:
+    def calculateTotalCredit(self):
         sumOfCredits: int = 0
 
         for t in self.__transcripts:
@@ -110,7 +88,7 @@ class Student(object):
 
         self.__totalCredit = sumOfCredits
 
-    def calculatePassedCourses(self) -> None:
+    def calculatePassedCourses(self):
         if(self.__passedCourses is None):
             self.__passedCourses = []
         for t in self.__transcripts:
@@ -125,6 +103,23 @@ class Student(object):
             if(c.getCourseCode() == currentCourse.getCourseCode()):
                 return True
         return False
+
+    def addFeedback(self, feedback: str):
+        if self.__feedback is None:
+            self.__feedback = []
+        self.__feedback.append(feedback)
+
+    def addFeedbackQuota(self, course: Course) -> None:
+        self.addFeedback("The student could not register for " + course.getCourseCode() + " because of a quota problem")
+
+    def addFeedbackPrereq(self, course: Course, prereq: Course):
+        self.addFeedback("The system did not allow " + course.getCourseCode() + " because student failed prereq. " + prereq.getCourseCode())
+
+    def setCurrentTranscript(self, currentTranscript: Transcript):
+        self.__currentTranscript = currentTranscript
+
+    def setId(self, _id: int):
+        self.__id = _id
 
     def getTotalCredit(self) -> int:
         return self.__totalCredit
@@ -144,14 +139,8 @@ class Student(object):
     def currentTranscript(self) -> Transcript:
         return self.__currentTranscript
 
-    def setCurrentTranscript(self, currentTranscript: Transcript):
-        self.__currentTranscript = currentTranscript
-
     def getId(self) -> int:
         return self.__id
-
-    def setId(self, _id: int):
-        self.__id = _id
 
     def save():
 
