@@ -5,7 +5,7 @@ from model.course import Course
 from model.elective import Elective
 from model.student import Student
 
-def convert_file_to_student(std: dict) -> Student:
+def convert_dict_to_student(std: dict) -> Student:
     stdid: int
     name: str
     surname: str

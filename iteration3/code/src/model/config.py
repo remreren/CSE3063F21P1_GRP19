@@ -1,14 +1,39 @@
 from typing import List
+from model.course import Course
 from model.elective import Elective
 from model.student import Student
 
 
 class Config(object):
-    def __init__(self, student_generation: bool, registration_term: str, curriculum: List[Student], electives: List[Elective]):
-        self.student_generation = student_generation
-        self.registration_term = registration_term
-        self.curriculum = curriculum
-        self.electives = electives
+    def __init__(self, student_generation: bool, registration_term: str, curriculum: List[Course], electives: List[Elective]):
+        self.__studentGeneration = student_generation
+        self.__registrationTerm = registration_term
+        self.__curriculum = curriculum
+        self.__electives = electives
+
+    def setStudentGeneration(self, studentGeneration: bool):
+        self.__studentGeneration = studentGeneration
+
+    def setRegistrationTerm(self, registrationTerm: str):
+        self.__registrationTerm = registrationTerm
+
+    def setCurriculum(self, curriculum: List[Course]):
+        self.__curriculum = curriculum
+
+    def setElectives(self, electives: List[Elective]):
+        self.__electives = electives
+    
+    def getStudentGeneration(self):
+        return self.__studentGeneration
+
+    def getRegistrationTerm(self):
+        return self.__registrationTerm
+
+    def getCurriculum(self):
+        return self.__curriculum
+
+    def getElectives(self):
+        return self.__electives
 
     def __str__(self):
-        return f"Config(student_generation={self.student_generation}, registration_term={self.registration_term}, curriculum={self.curriculum}, electives={self.electives})"
+        return f"Config(student_generation={self.__studentGeneration}, registration_term={self.__registrationTerm}, curriculum={self.__curriculum}, electives={self.__electives})"
