@@ -1,6 +1,5 @@
-from typing import List
+from typing import Dict, List
 
-from idna import core
 from model.config import Config
 from model.course import Course
 from model.elective import Elective
@@ -93,3 +92,15 @@ def convert_dict_to_config(conf: dict) -> Config:
         electives = [convert_dict_to_elective(elect) for elect in conf["electives"]]
     
     return Config(student_generation, registration_term, curriculum, electives)
+    
+gpa_letter_to_grade: Dict[str, float] = {
+    "AA", 4.0,
+    "BA", 3.5,
+    "BB", 3.0,
+    "CB", 2.5,
+    "CC", 2.0,
+    "DC", 1.5,
+    "DD", 1.0,
+    "FD", 0.5,
+    "FF", 0.0
+}
