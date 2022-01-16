@@ -7,37 +7,43 @@ class Elective(Course):
         pass
 
     def __init__(self, course_type: str, credit_requirement: int, quota: int, courses: List[Course]):
-        self.__course_type = course_type
-        self.__credit_requirement = credit_requirement
-        self.__quota = quota
-        self.__courses = courses
+        self.__courseType: str = course_type
+        self.__creditRequirement: int = credit_requirement
+        self.__quota: int = quota
+        self.__courses: List[Course] = courses
 
-    def get_elective_quantity(self) -> int:
-        return len(self.__courses)
-
-    def is_quota_full(self, cs: Course) -> bool:
+    def isQuotaFull(self, cs: Course) -> bool:
         for course in self.__courses:
-            if course.__courseCode == cs.__courseCode:
+            if course.getCourseCode() == cs.getCourseCode:
                 if self.__quota <= self.getEnrolledSize():
                     return True
         return False
 
-    def set_new_term(self):
+    def setNewTerm(self):
         for course in self.__courses:
             course.__stdQuotaProblem = []
             course.__enrolledList = []
 
-    def getQuota(self):
+    def setSemester(self, course: Course, semester: int):
+        course.setSemester(semester)
+
+    def getCourseType(self) -> str:
+        return self.__courseType
+
+    def getCreditRequirement(self) -> int:
+        return self.__creditRequirement
+
+    def getQuota(self) -> int:
         return self.__quota
 
-    def setSemester(self, course: Course, semester: int):
-        course.__semester = semester
+    def getCourses(self) -> List[Course]:
+        return self.__courses
 
-    def set_semester(self, course: Course, semester: int):
-        course.__semester = semester
+    def getElectiveQuantity(self) -> int:
+        return len(self.__courses)
 
     def __str__(self):
-        return f"Elective(type={self.__course_type}, credit_requirement={self.__credit_requirement}, quota={self.__quota}, courses={self.__courses})"
+        return f"Elective(type={self.__courseType}, credit_requirement={self.__creditRequirement}, quota={self.__quota}, courses={self.__courses})"
 
     def __repr__(self):
-        return f"Elective(type={self.__course_type}, credit_requirement={self.__credit_requirement}, quota={self.__quota}, courses={self.__courses})"
+        return f"Elective(type={self.__courseType}, credit_requirement={self.__creditRequirement}, quota={self.__quota}, courses={self.__courses})"

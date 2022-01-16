@@ -51,6 +51,9 @@ class Course(object):
     def addFeedback(self, feedback: str):
         self.__feedback.append(feedback)
 
+    def setSemester(self, semester: int):
+        self.__semester = semester
+
     def getEnrolledSize(self) -> int:
         return len(self.__enrolledList)
 
