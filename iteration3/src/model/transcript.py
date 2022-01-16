@@ -52,14 +52,6 @@ class Transcript(object):
     def getSemesterCourses(self):
         return self.__semesterCourses
 
-    def compareTo(self, o):
-        if o._semester == self._semester:
-            return 0
-        elif o._semester > self._semester:
-            return -1
-        else:
-            return o.__semester
-
     def addCourse(self, tcs: List [Course]):
         if self.__semesterCourses is None:
             self.__semesterCourses = []
