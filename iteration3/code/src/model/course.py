@@ -1,5 +1,5 @@
 from typing import List
-from model.student import Student
+from src.model.student import Student
 
 
 class Course(object):
@@ -9,7 +9,7 @@ class Course(object):
         self.__credit = credit
         self.__semester = semester
         self.__courseType = course_type
-        self.__prerequisites: List[Course] = prerequisites
+        self.__prerequisites: List[object] = prerequisites
 
         self.__enrolledList: List[Student] = []
         self.__stdQuotaProblem: List[Student] = []

@@ -1,7 +1,7 @@
 from typing import List
 
-from model.course import Course
-from model.takencourse import TakenCourse
+from src.model.course import Course
+from src.model.takencourse import TakenCourse
 
 from utils.utils import gpa_letter_to_grade
 

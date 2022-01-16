@@ -5,10 +5,10 @@ from os import listdir
 import random
 from typing import List
 
-from model.config import Config
-from model.student import Student
-from model.takencourse import TakenCourse
-from model.transcript import Transcript
+from src.model.config import Config
+from src.model.student import Student
+from src.model.takencourse import TakenCourse
+from src.model.transcript import Transcript
 from utils.utils import convert_dict_to_config, convert_dict_to_student
 
 

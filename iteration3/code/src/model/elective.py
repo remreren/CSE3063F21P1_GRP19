@@ -1,6 +1,6 @@
 from typing import List
 
-from model.course import Course
+from src.model.course import Course
 
 class Elective(Course):
     def __init__(self):

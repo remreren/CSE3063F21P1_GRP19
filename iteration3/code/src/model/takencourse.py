@@ -1,4 +1,4 @@
-from model.course import Course
+from src.model.course import Course
 
 
 class TakenCourse(Course):

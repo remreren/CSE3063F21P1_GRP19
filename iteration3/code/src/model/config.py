@@ -1,7 +1,7 @@
 from typing import List
-from model.course import Course
-from model.elective import Elective
-from model.student import Student
+from src.model.course import Course
+from src.model.elective import Elective
+from src.model.student import Student
 
 
 class Config(object):
