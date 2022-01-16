@@ -1,4 +1,7 @@
-from typing import List
+from typing import Dict, List
+
+from model.config import Config
+from model.course import Course
 from model.elective import Elective
 from model.student import Student
 
@@ -41,3 +44,63 @@ def convert_dict_to_elective(elect: dict) -> Elective:
         courses = elect["courses"]
 
     return Elective(course_type, credit_requirement, quota, courses)
+
+def convert_dict_to_course(cours: dict) -> Course:
+    course_code: str
+    course_name: str
+    credit: int
+    semester: int
+    course_type: str
+    prerequisites: List[Course] = []
+    
+    if "courseCode" in cours:
+        course_code = cours["courseCode"]
+
+    if "courseName" in cours:
+        course_name = cours["courseName"]
+    
+    if "credit" in cours:
+        credit = cours["credit"]
+
+    if "semester" in cours:
+        semester = cours["semester"]
+
+    if "type" in cours:
+        course_type = cours["type"]
+
+    if "prerequisites" in cours:
+        prerequisites = [course for course in cours["prerequisites"]]
+
+    return Course(course_code, course_name, credit, prerequisites, semester, course_type)
+
+def convert_dict_to_config(conf: dict) -> Config:
+    student_generation: bool
+    registration_term: str
+    curriculum: List[Course]
+    electives: List[Elective]
+
+    if "studentGeneration" in conf:
+        student_generation = conf["studentGeneration"]
+
+    if "registrationTerm" in conf:
+        registration_term = conf["registrationTerm"]
+
+    if "curriculum" in conf:
+        curriculum = [convert_dict_to_course(course) for course in conf["curriculum"]]
+
+    if "electives" in conf:
+        electives = [convert_dict_to_elective(elect) for elect in conf["electives"]]
+    
+    return Config(student_generation, registration_term, curriculum, electives)
+    
+gpa_letter_to_grade: Dict[str, float] = {
+    "AA", 4.0,
+    "BA", 3.5,
+    "BB", 3.0,
+    "CB", 2.5,
+    "CC", 2.0,
+    "DC", 1.5,
+    "DD", 1.0,
+    "FD", 0.5,
+    "FF", 0.0
+}

@@ -1,0 +1,646 @@
+{
+    "registrationTerm": "fall",
+    "studentGeneration": true,
+    "curriculum": [
+        {
+            "courseCode": "ATA121",
+            "courseName": "Atatürk İlkeleri ve İnkılap Tarihi I",
+            "credit": 2,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "MBG1201",
+            "courseName": "Introduction to Modern Biology",
+            "credit": 5,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "CSE1200",
+            "courseName": "Introduction to Computer Engineering",
+            "credit": 4,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "CSE1241",
+            "courseName": "Computer Programming I",
+            "credit": 6,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "MATH1001",
+            "courseName": "Calculus I",
+            "credit": 6,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "PHYS1101",
+            "courseName": "Physics I",
+            "credit": 4,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "PHYS1103",
+            "courseName": "Physics Lab I",
+            "credit": 2,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "TRD121",
+            "courseName": "Türk Dili I",
+            "credit": 2,
+            "semester": 1,
+            "type": null
+        },
+        {
+            "courseCode": "ATA122",
+            "courseName": "Atatürk İlkeleri ve İnkılap Tarihi II",
+            "credit": 2,
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "CSE1242",
+            "courseName": "Computer Programming II",
+            "credit": 6,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE1241"
+                }
+            ],
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "MATH1002",
+            "courseName": "Calculus II",
+            "credit": 6,
+            "prerequisites": [
+                {
+                    "courseCode": "MATH1001"
+                }
+            ],
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "MATH2256",
+            "courseName": "Linear Algebra for Computer Engineering",
+            "credit": 5,
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "PHYS1102",
+            "courseName": "Physics II",
+            "credit": 4,
+            "prerequisites": [
+                {
+                    "courseCode": "PHYS1101"
+                }
+            ],
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "PHYS1104",
+            "courseName": "Physics Lab II",
+            "credit": 2,
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "TRD122",
+            "courseName": "Türk Dili II",
+            "credit": 2,
+            "semester": 2,
+            "type": null
+        },
+        {
+            "courseCode": "NTExxx",
+            "courseName": "Non-Technical Elective - 1",
+            "credit": 3,
+            "semester": 2,
+            "type": "NTE"
+        },
+        {
+            "courseCode": "CSE2023",
+            "courseName": "Discrete Computational Structures",
+            "credit": 6,
+            "semester": 3,
+            "type": null
+        },
+        {
+            "courseCode": "CSE2225",
+            "courseName": "Data Structures",
+            "credit": 7,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE1242"
+                }
+            ],
+            "semester": 3,
+            "type": null
+        },
+        {
+            "courseCode": "ECON2004",
+            "courseName": "Engineering Economy",
+            "credit": 4,
+            "semester": 3,
+            "type": null
+        },
+        {
+            "courseCode": "EE2031",
+            "courseName": "Electric Circuits",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode": "PHYS1102"
+                }
+            ],
+            "semester": 3,
+            "type": null
+        },
+        {
+            "courseCode": "MATH2055",
+            "courseName": "Differential Equations",
+            "credit": 4,
+            "prerequisites": [
+                {
+                    "courseCode": "MATH1001"
+                }
+            ],
+            "semester": 3,
+            "type": null
+        },
+        {
+            "courseCode": "MATH2059",
+            "courseName": "Numerical Methods",
+            "credit": 4,
+            "prerequisites": [
+                {
+                    "courseCode": "MATH1001"
+                }
+            ],
+            "semester": 3,
+            "type": null
+        },
+        {
+            "courseCode": "CSE2246",
+            "courseName": "Analysis of Algorithms",
+            "credit": 6,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE2225"
+                }
+            ],
+            "semester": 4,
+            "type": null
+        },
+        {
+            "courseCode": "CSE2138",
+            "courseName": "Systems Programming",
+            "credit": 7,
+            "semester": 4,
+            "type": null
+        },
+        {
+            "courseCode": "CSE2260",
+            "courseName": "Principles of Programming Languages",
+            "credit": 4,
+            "semester": 4,
+            "type": null
+        },
+        {
+            "courseCode": "EE2032",
+            "courseName": "Electronics",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode": "EE2031"
+                }
+            ],
+            "semester": 4,
+            "type": null
+        },
+        {
+            "courseCode": "STAT2253",
+            "courseName": "Introduction to Probability and Statistics",
+            "credit": 5,
+            "semester": 4,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3215",
+            "courseName": "Digital Logic Design",
+            "credit": 6,
+            "semester": 5,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3033",
+            "courseName": "Operating Systems",
+            "credit": 7,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE2225"
+                }
+            ],
+            "semester": 5,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3055",
+            "courseName": "Database Systems",
+            "credit": 7,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE2225"
+                }
+            ],
+            "semester": 5,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3063",
+            "courseName": "Object-Oriented Software Design",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE1242"
+                }
+            ],
+            "semester": 5,
+            "type": null
+        },
+        {
+            "courseCode": "IE3081",
+            "courseName": "Modelling and Discrete Simulation",
+            "credit": 4,
+            "prerequisites": [
+                {
+                    "courseCode": "STAT2253"
+                }
+            ],
+            "semester": 5,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3038",
+            "courseName": "Computer Organization",
+            "credit": 7,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE2138"
+                },
+                {
+                    "courseCode": "CSE3215"
+                }
+            ],
+            "semester": 6,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3044",
+            "courseName": "SoftWare Engineering",
+            "credit": 7,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE3055"
+                }
+            ],
+            "semester": 6,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3048",
+            "courseName": "Introduction to Signals and Systems",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode": "MATH2055"
+                }
+            ],
+            "semester": 6,
+            "type": null
+        },
+        {
+            "courseCode": "CSE3264",
+            "courseName": "Formal Languages and Automata Theory",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode": "CSE2023"
+                }
+            ],
+            "semester": 6,
+            "type": null
+        },
+        {
+            "courseCode": "IE3235",
+            "courseName": "Operations Research",
+            "credit": 4,
+            "prerequisites": [
+                {
+                    "courseCode": "MATH2256"
+                }
+            ],
+            "semester": 6,
+            "type": null
+        },
+        {
+            "courseCode": "COMM2202",
+            "courseName": "Technical Comm. and Entrepreneurship",
+            "credit": 2,
+            "semester": 6,
+            "type": null
+        },
+        {
+            "courseCode": "CSE4074",
+            "courseName": "Computer Networks",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode": "MATH2256"
+                }
+            ],
+            "semester": 7,
+            "type": null
+        },
+        {
+            "courseCode": "CSE4219",
+            "courseName": "Principles of Embedded System Design",
+            "credit": 6,
+            "semester": 7,
+            "type": null
+        },
+        {
+            "courseCode": "CSE4297",
+            "courseName": "Engineering Project I",
+            "credit": 5,
+            "semester": 7,
+            "type": null
+        },
+        {
+            "courseCode": "ISG121",
+            "courseName": "İş Sağlığı ve Güvenliği I",
+            "credit": 2,
+            "semester": 7,
+            "type": null
+        },
+        {
+            "courseCode": "CSE4288",
+            "courseName": "Introduction to Machine Learning",
+            "credit": 5,
+            "semester": 7,
+            "type": null
+        },
+        {
+            "courseCode": "UE",
+            "courseName": "University Elective",
+            "credit": 3,
+            "semester": 7,
+            "type": "NTE"
+        },
+        {
+            "courseCode": "TExxx",
+            "courseName": "Technical Elective - 1",
+            "credit": 5,
+            "semester": 7,
+            "type": "TE"
+        },
+        {
+            "courseCode": "CSE4298",
+            "courseName": "Engineering Project II",
+            "credit": 5,
+            "prerequisites": [
+                {
+                    "courseCode":"CSE4297"
+                }
+            ],
+            "semester": 8,
+            "type": null
+        },
+        {
+            "courseCode": "ISG122",
+            "courseName": "İş Sağlığı ve Güvenliği II",
+            "credit": 2,
+            "semester": 8,
+            "type": null
+        },
+        {
+            "courseCode": "FTExxx",
+            "courseName": "Faculty Technical Electives",
+            "credit": 5,
+            "semester": 8,
+            "type": "FTE"
+        },
+        {
+            "courseCode": "NTExxx",
+            "courseName": "Non-Technical Elective - 2",
+            "credit": 3,
+            "semester": 8,
+            "type": "NTE"
+        },
+        {
+            "courseCode": "TExxx",
+            "courseName": "Technical Elective - 2",
+            "credit": 5,
+            "semester": 8,
+            "type": "TE"
+        },
+        {
+            "courseCode": "TExxx",
+            "courseName": "Technical Elective - 3",
+            "credit": 5,
+            "semester": 8,
+            "type": "TE"
+        },
+        {
+            "courseCode": "TExxx",
+            "courseName": "Technical Elective - 4",
+            "credit": 5,
+            "semester": 8,
+            "type": "TE"
+        }
+    ],
+    "electives": [
+        {
+            "type": "NTE",
+            "creditRequirement": null,
+            "quota": 5,
+            "courses": [
+                {
+                    "courseCode": "BUS1003",
+                    "courseName": "Entrepreneurship and Innovation",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "BUS1004",
+                    "courseName": "Strategic Entrepreneurship",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "BUS2005",
+                    "courseName": "International Business",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "CAS1001",
+                    "courseName": "Self Management",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "CAS1010",
+                    "courseName": "Our Biosphere",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "CAS1060",
+                    "courseName": "Geometric Origami",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "HR1013",
+                    "courseName": "Career Development",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "MGT1021",
+                    "courseName": "Design, Innovation and Entrepreneurship",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "YDA1001",
+                    "courseName": "German for Beginners",
+                    "credit": 3
+                },
+                {
+                    "courseCode": "YDF1001",
+                    "courseName": "French for Beginners",
+                    "credit": 3
+                }
+            ]
+        },
+        {
+            "type": "TE",
+            "creditRequirement": 145,
+            "quota": 5,
+            "courses": [
+                {
+                    "courseCode": "CSE4026",
+                    "courseName": "Introduction to Robotics and Control Theory",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4034",
+                    "courseName": "Advanced Unix Programming",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4061",
+                    "courseName": "Compiler Design",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4083",
+                    "courseName": "Computer Graphics",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4040",
+                    "courseName": "Cloud Computing",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4044",
+                    "courseName": "Software Project Management",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4059",
+                    "courseName": "Internet Programming",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4082",
+                    "courseName": "Artificial Intelligence",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4034",
+                    "courseName": "Advanced Unix Programming",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4086",
+                    "courseName": "Mobile Device Programming",
+                    "credit": 5
+                }
+            ]
+        },
+        {
+            "type": "FTE",
+            "creditRequirement": 145,
+            "quota": 5,
+            "courses": [
+                {
+                    "courseCode": "BIOE4072",
+                    "courseName": "Planning and Management of Research",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CHE4060",
+                    "courseName": "Cost Management in Chemical Industries",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CHE4068",
+                    "courseName": "Financial Engineering",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "CSE4056",
+                    "courseName": "Management of Information Systems",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "ENVE4062",
+                    "courseName": "Energy and the Environment",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "IE4087",
+                    "courseName": "Introduction to Total Quality Management",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "ME4022",
+                    "courseName": "Control Systems",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "ME4033",
+                    "courseName": "Designing Quality Products",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "MGT4086",
+                    "courseName": "Managing Engineering and Technology",
+                    "credit": 5
+                },
+                {
+                    "courseCode": "ME4051",
+                    "courseName": "Automotive Engineering",
+                    "credit": 5
+                }
+            ]
+        }
+    ]
+}
