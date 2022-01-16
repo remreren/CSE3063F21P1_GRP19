@@ -1,8 +1,8 @@
 from typing import List
-from model.course import Course
-from model.student import Student
-from model.takencourse import TakenCourse
-from model.transcript import Transcript
+from src.model.course import Course
+from src.model.student import Student
+from src.model.takencourse import TakenCourse
+from src.model.transcript import Transcript
 
 
 class Advisor(object):

@@ -1,8 +1,7 @@
 from typing import List
-from model.course import Course
-from model.takencourse import TakenCourse
-from model.transcript import Transcript
-from utils.utils import gpa_letter_to_grade
+from src.model.course import Course
+from src.model.transcript import Transcript
+from src.utils.utils import gpa_letter_to_grade
 
 class Student(object):
 

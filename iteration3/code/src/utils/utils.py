@@ -1,11 +1,11 @@
 from typing import Dict, List
 
-from model.config import Config
-from model.course import Course
-from model.elective import Elective
-from model.student import Student
+from src.model.config import Config
+from src.model.course import Course
+from src.model.elective import Elective
+from src.model.student import Student
 
-def convert_file_to_student(std: dict) -> Student:
+def convert_dict_to_student(std: dict) -> Student:
     stdid: int
     name: str
     surname: str
