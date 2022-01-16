@@ -1,23 +1,19 @@
 from typing import List
-from Transcript.utils import Utils
+
+from model.course import Course
+from model.takencourse import TakenCourse
+
+from utils.utils import gpa_letter_to_grade
 
 
 class Transcript(object):
-    # def __init__(self, semester: int, semesterCourses: List[object], semesterGPA: str, totalCredit: str):
-    #
-    #     self.semester = semester
-    #     self.semesterCourses: List[Transcript] = semesterCourses
-    #     self.semesterGPA = semesterGPA
-    #     self.getGradeLetter: List[courseLetterGrade] = getGradeLetter
-    #     self.totalCredit = totalCredit
 
     def _init_(self):
-        self.__semester = 0
-        self.__semesterCourses = None
-        self.__semesterGPA = 0
-        self.__totalCredit = 0
-        self.__id = 0
-        self.__semesterCourses = []
+        self.__semester: int = 0
+        self.__semesterGPA: float = 0
+        self.__totalCredit: float = 0
+        self.__id: int = 0
+        self.__semesterCourses: List[TakenCourse] = []
 
     def calculate(self):
         self.calculateTotalCredit()
@@ -25,11 +21,10 @@ class Transcript(object):
 
     def calculateSemesterGPA(self):
         creditCount = 0
-        utils = Transcript.utils.Utils.getInstance()
         sum = 0.0
         for c in self.__semesterCourses:
-            creditCount += c.getCredit()
-            sum += c.getCredit() * utils.getGPAOfLetterGrade(c.getLetterGrade())
+            creditCount += c.__credit
+            sum += c.__credit * gpa_letter_to_grade.get(str(c.__letterGrade), 0.0)
 
         self.__semesterGPA = sum/creditCount
 
@@ -45,7 +40,7 @@ class Transcript(object):
     def getSemester(self):
         return self.__semester
 
-    def setSemester(self, semester):
+    def setSemester(self, semester: int):
         self.__semester = semester
 
     def getSemesterGPA(self):
@@ -65,12 +60,12 @@ class Transcript(object):
         else:
             return o.__semester
 
-    def addCourse(self, tcs: List [Courses]):
+    def addCourse(self, tcs: List [Course]):
         if self.__semesterCourses is None:
             self.__semesterCourses = []
         self.__semesterCourses.append(tcs)
 
-    def add_Course(self, tcs: List [Courses]):
+    def add_Course(self, tcs: List [Course]):
         if self.__semesterCourses is None:
             self.__semesterCourses = []
         self.__semesterCourses.extend(tcs)
